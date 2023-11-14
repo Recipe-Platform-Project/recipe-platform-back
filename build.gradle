@@ -23,24 +23,14 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-<<<<<<< HEAD
-=======
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-<<<<<<< HEAD
->>>>>>> 1a6e94d (first-commit)
-=======
-	implementation 'org.springframework.boot:spring-boot-starter-mail'
->>>>>>> 2f13e44 (23.11.14_AuthUpdate)
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-<<<<<<< HEAD
-=======
 	implementation 'io.jsonwebtoken:jjwt:0.9.1'
->>>>>>> 1a6e94d (first-commit)
 }
 
 tasks.named('test') {
