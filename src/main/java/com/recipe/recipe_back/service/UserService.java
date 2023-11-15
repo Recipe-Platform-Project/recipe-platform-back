@@ -4,7 +4,7 @@ import org.springframework.http.ResponseEntity;
 
 import com.recipe.recipe_back.dto.request.user.PatchNicknameRequestDto;
 import com.recipe.recipe_back.dto.request.user.PatchProfileImageRequestDto;
-import com.recipe.recipe_back.dto.response.user.FindUserIdResponseDto;
+import com.recipe.recipe_back.dto.response.auth.FindUserIdResponseDto;
 import com.recipe.recipe_back.dto.response.user.PatchNicknameResponseDto;
 import com.recipe.recipe_back.dto.response.user.PatchProfileImageResponseDto;
 

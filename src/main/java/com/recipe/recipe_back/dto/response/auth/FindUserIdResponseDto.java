@@ -1,4 +1,4 @@
-package com.recipe.recipe_back.dto.response.user;
+package com.recipe.recipe_back.dto.response.auth;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -7,6 +7,11 @@ import com.recipe.recipe_back.dto.response.ResponseCode;
 import com.recipe.recipe_back.dto.response.ResponseDto;
 import com.recipe.recipe_back.dto.response.ResponseMessage;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Getter
+@NoArgsConstructor
 public class FindUserIdResponseDto extends ResponseDto{
 
     private String email;

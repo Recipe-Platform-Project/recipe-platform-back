@@ -4,6 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import com.recipe.recipe_back.dto.request.auth.FindUserPwRequestDto;
 import com.recipe.recipe_back.dto.request.auth.SignUpRequestDto;
 import com.recipe.recipe_back.dto.request.user.PatchNicknameRequestDto;
 import com.recipe.recipe_back.dto.request.user.PatchProfileImageRequestDto;
@@ -47,5 +50,9 @@ public class UserEntity {
 
     public void patchProfileImage(PatchProfileImageRequestDto dto) {
         this.profileImageUrl = dto.getProfileImage();
+    }
+
+    public void updatePassword(String newPassword) {
+        this.password = new BCryptPasswordEncoder().encode(newPassword);
     }
 }

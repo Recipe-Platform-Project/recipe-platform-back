@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import com.recipe.recipe_back.dto.request.user.PatchNicknameRequestDto;
 import com.recipe.recipe_back.dto.request.user.PatchProfileImageRequestDto;
 import com.recipe.recipe_back.dto.response.ResponseDto;
-import com.recipe.recipe_back.dto.response.user.FindUserIdResponseDto;
+import com.recipe.recipe_back.dto.response.auth.FindUserIdResponseDto;
 import com.recipe.recipe_back.dto.response.user.PatchNicknameResponseDto;
 import com.recipe.recipe_back.dto.response.user.PatchProfileImageResponseDto;
 import com.recipe.recipe_back.entity.UserEntity;
