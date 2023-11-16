@@ -6,12 +6,10 @@ import com.recipe.recipe_back.dto.request.auth.FindUserIdRequestDto;
 import com.recipe.recipe_back.dto.request.auth.FindUserPwRequestDto;
 import com.recipe.recipe_back.dto.request.auth.SignInRequestDto;
 import com.recipe.recipe_back.dto.request.auth.SignUpRequestDto;
-import com.recipe.recipe_back.dto.request.user.PatchNicknameRequestDto;
 import com.recipe.recipe_back.dto.response.auth.FindUserIdResponseDto;
 import com.recipe.recipe_back.dto.response.auth.FindUserPwResponseDto;
 import com.recipe.recipe_back.dto.response.auth.SignInResponseDto;
 import com.recipe.recipe_back.dto.response.auth.SignUpResponseDto;
-import com.recipe.recipe_back.dto.response.user.PatchNicknameResponseDto;
 
 public interface AuthService {
     
@@ -20,4 +18,5 @@ public interface AuthService {
 
     ResponseEntity<? super FindUserIdResponseDto> findUserId(FindUserIdRequestDto dto);
     ResponseEntity<? super FindUserPwResponseDto> findUserPw(FindUserPwRequestDto dto);
+
 }

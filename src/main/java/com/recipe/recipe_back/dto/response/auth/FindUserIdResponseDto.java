@@ -26,8 +26,8 @@ public class FindUserIdResponseDto extends ResponseDto{
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
     
-    public static ResponseEntity<FindUserIdResponseDto> findUserFailed(){
-        FindUserIdResponseDto result = new FindUserIdResponseDto(ResponseCode.FIND_USER_FAILED, ResponseMessage.FIND_USER_FAILED, null);
+    public static ResponseEntity<ResponseDto> findUserFailed(){
+        ResponseDto result = new ResponseDto(ResponseCode.FIND_USER_FAILED, ResponseMessage.FIND_USER_FAILED);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
     }
 

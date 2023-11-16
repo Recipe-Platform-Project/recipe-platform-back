@@ -10,6 +10,7 @@ import com.recipe.recipe_back.dto.request.auth.FindUserPwRequestDto;
 import com.recipe.recipe_back.dto.request.auth.SignUpRequestDto;
 import com.recipe.recipe_back.dto.request.user.PatchNicknameRequestDto;
 import com.recipe.recipe_back.dto.request.user.PatchProfileImageRequestDto;
+import com.recipe.recipe_back.dto.request.user.PatchUserPwRequestDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -52,7 +53,14 @@ public class UserEntity {
         this.profileImageUrl = dto.getProfileImage();
     }
 
+    //유저 비밀번호 변경
+    public void patchUserPassword(String newPassword){
+        this.password = newPassword;
+    }
+
+    //유저 임시 비밀번호 발급
     public void updatePassword(String newPassword) {
         this.password = new BCryptPasswordEncoder().encode(newPassword);
     }
+
 }

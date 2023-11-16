@@ -22,7 +22,7 @@ public class SignUpRequestDto {
     @NotBlank @Size(min=8, max=20)
     private String password;
 
-    @NotBlank
+    @NotBlank @Size(min=2, max=8)
     private String nickname;
 
     @NotBlank

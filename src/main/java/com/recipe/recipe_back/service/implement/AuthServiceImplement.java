@@ -1,8 +1,6 @@
 package com.recipe.recipe_back.service.implement;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -166,5 +164,6 @@ public class AuthServiceImplement implements AuthService{
 
         return sparePassword;
     }
+
 
 }
