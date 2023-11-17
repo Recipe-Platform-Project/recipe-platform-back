@@ -1,8 +1,5 @@
 package com.recipe.recipe_back.service.implement;
 
-import java.util.List;
-import java.util.ArrayList;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +8,8 @@ import com.recipe.recipe_back.dto.response.ResponseDto;
 import com.recipe.recipe_back.dto.response.userPage.GetSignInUserResponseDto;
 import com.recipe.recipe_back.dto.response.userPage.GetUserResponseDto;
 import com.recipe.recipe_back.dto.response.userPage.PatchProfileCommentResponseDto;
-import com.recipe.recipe_back.entity.BoardEntity;
 import com.recipe.recipe_back.entity.UserEntity;
-import com.recipe.recipe_back.repository.UserPageRepository;
+import com.recipe.recipe_back.repository.UserRepository;
 import com.recipe.recipe_back.service.UserPageService;
 
 import lombok.RequiredArgsConstructor;
@@ -22,16 +18,15 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserPageImplement implements UserPageService {
 
-    private final UserPageRepository userPageRepository;
+    private final UserRepository userRepository;
 
     @Override
     public ResponseEntity<? super GetSignInUserResponseDto> getSignInUser(String email) {
 
         UserEntity userEntity;
-        BoardEntity boardEntity=null;
         try { 
             
-            userEntity = userPageRepository.findByEmail(email);
+            userEntity = userRepository.findByEmail(email);
             if (userEntity == null) return GetSignInUserResponseDto.notExistUser();
 
         } catch (Exception exception) {
@@ -39,17 +34,17 @@ public class UserPageImplement implements UserPageService {
             return ResponseDto.databaseError();
         }
 
-        return GetSignInUserResponseDto.success(userEntity, boardEntity);
+        return GetSignInUserResponseDto.success(userEntity);
     }
 
     @Override
     public ResponseEntity<? super GetUserResponseDto> getUser(String nickname) {
+
         UserEntity userEntity;
-        BoardEntity boardEntity = null;
 
         try {
 
-            userEntity = userPageRepository.findByEmail(nickname);
+            userEntity = userRepository.findByEmail(nickname);
             if (userEntity == null) return GetUserResponseDto.notExistUser();
             
         } catch (Exception exception) {
@@ -57,7 +52,7 @@ public class UserPageImplement implements UserPageService {
             return ResponseDto.databaseError();
         }
 
-        return GetUserResponseDto.success(userEntity, boardEntity);
+        return GetUserResponseDto.success(userEntity);
     }
 
 
@@ -66,11 +61,11 @@ public class UserPageImplement implements UserPageService {
 
         try {
 
-            UserEntity userEntity = userPageRepository.findByEmail(email);
+            UserEntity userEntity = userRepository.findByEmail(email);
             if (userEntity == null) return PatchProfileCommentResponseDto.notExistUser();
             
             userEntity.patchProfileComment(dto);
-            userPageRepository.save(userEntity);
+            userRepository.save(userEntity);
             
         } catch (Exception exception) {
             exception.printStackTrace();

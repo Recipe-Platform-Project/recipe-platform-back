@@ -22,19 +22,18 @@ public class GetUserResponseDto extends ResponseDto {
     private int boardNumber;
     private String profileComment;
 
-    private GetUserResponseDto(String code, String message, UserEntity userEntity, BoardEntity boardEntity) {
+    private GetUserResponseDto(String code, String message, UserEntity userEntity) {
         super(code, message);
         this.email = userEntity.getEmail();
         this.nickname = userEntity.getNickname();
         this.profileImageUrl = userEntity.getProfileImageUrl();
         this.followCount = userEntity.getFollowCount();
         this.folowingCount = userEntity.getFollowingCount();
-        this.boardNumber = boardEntity.getBoardNumber();
         this.profileComment = userEntity.getProfileComment();
     }
 
-    public static ResponseEntity<GetUserResponseDto> success(UserEntity userEntity, BoardEntity boardEntity) {
-        GetUserResponseDto result = new GetUserResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, userEntity, boardEntity);
+    public static ResponseEntity<GetUserResponseDto> success(UserEntity userEntity) {
+        GetUserResponseDto result = new GetUserResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, userEntity);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 

@@ -9,7 +9,6 @@ import com.recipe.recipe_back.common.object.ChefListItem;
 import com.recipe.recipe_back.dto.response.ResponseCode;
 import com.recipe.recipe_back.dto.response.ResponseDto;
 import com.recipe.recipe_back.dto.response.ResponseMessage;
-import com.recipe.recipe_back.entity.BoardEntity;
 import com.recipe.recipe_back.entity.UserEntity;
 
 import lombok.Getter;
@@ -19,13 +18,13 @@ public class GetChefSearchListResponseDto extends ResponseDto {
 
     private List<ChefListItem> chefList;
 
-    private GetChefSearchListResponseDto(String code, String message, List<UserEntity> userEntities, List<BoardEntity> boardEntities) {
+    private GetChefSearchListResponseDto(String code, String message, List<UserEntity> userEntities) {
         super(code, message);
-        this.chefList = ChefListItem.getList(userEntities, boardEntities);
+        this.chefList = ChefListItem.getList(userEntities);
     }
 
-    public static ResponseEntity<GetChefSearchListResponseDto> success(List<UserEntity> userEntities, List<BoardEntity> boardEntities) {
-        GetChefSearchListResponseDto result = new GetChefSearchListResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, userEntities, boardEntities);
+    public static ResponseEntity<GetChefSearchListResponseDto> success(List<UserEntity> userEntities) {
+        GetChefSearchListResponseDto result = new GetChefSearchListResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, userEntities);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 

@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import com.recipe.recipe_back.dto.response.ResponseCode;
 import com.recipe.recipe_back.dto.response.ResponseDto;
 import com.recipe.recipe_back.dto.response.ResponseMessage;
-import com.recipe.recipe_back.entity.BoardEntity;
 import com.recipe.recipe_back.entity.UserEntity;
 
 import lombok.Getter;
@@ -22,19 +21,18 @@ public class GetSignInUserResponseDto extends ResponseDto {
     private int boardNumber;
     private String profileComment;
 
-    private GetSignInUserResponseDto(String code, String message, UserEntity userEntity, BoardEntity boardEntity) {
+    private GetSignInUserResponseDto(String code, String message, UserEntity userEntity) {
         super(code, message);
         this.email = userEntity.getEmail();
         this.nickname = userEntity.getNickname();
         this.profileImageUrl = userEntity.getProfileImageUrl();
         this.followCount = userEntity.getFollowCount();
         this.followingCount = userEntity.getFollowingCount();
-        this.boardNumber = boardEntity.getBoardNumber();
         this.profileComment = userEntity.getProfileComment();
     }
 
-    public static ResponseEntity<GetSignInUserResponseDto> success(UserEntity userEntity, BoardEntity boardEntity) {
-        GetSignInUserResponseDto result = new GetSignInUserResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, userEntity, boardEntity);
+    public static ResponseEntity<GetSignInUserResponseDto> success(UserEntity userEntity) {
+        GetSignInUserResponseDto result = new GetSignInUserResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, userEntity);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
