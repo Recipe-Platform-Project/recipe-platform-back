@@ -19,13 +19,13 @@ public class SignUpRequestDto {
     @NotBlank @Email
     private String email;
 
-    @NotBlank @Size(min=8, max=20)
+    @NotBlank @Size(min=8, max=20) @Pattern(regexp = "(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\\W)(?=\\S+$).{8,16}")
     private String password;
 
-    @NotBlank @Size(min=2, max=8)
+    @NotBlank @Size(min=2, max=8) @Pattern(regexp = "^[ㄱ-ㅎ가-힣a-z0-9-_]{2,10}$")
     private String nickname;
 
-    @NotBlank
+    @NotBlank 
     private String name;
 
     @NotBlank @Pattern(regexp="^[0-9]{11,13}$")
@@ -41,4 +41,5 @@ public class SignUpRequestDto {
     private Boolean agreedPersonProsessing;
 
     private String profileImageUrl;
+
 }

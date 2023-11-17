@@ -1,5 +1,7 @@
 package com.recipe.recipe_back.entity;
 
+import java.util.Random;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -61,6 +63,26 @@ public class UserEntity {
     //유저 임시 비밀번호 발급
     public void updatePassword(String newPassword) {
         this.password = new BCryptPasswordEncoder().encode(newPassword);
+    }
+
+    public void defaultProfileImage(String profileImageUrl){
+        if(profileImageUrl == null){
+            String[] defaultImageUrls = {
+                "https://cdn.pixabay.com/photo/2023/10/02/14/00/egg-8289259_1280.png",
+                "https://cdn.pixabay.com/photo/2023/10/04/18/49/pizza-8294340_1280.png",
+                "https://cdn.pixabay.com/photo/2022/01/11/19/43/avocado-6931344_1280.jpg",
+                "https://cdn.pixabay.com/photo/2021/07/21/17/25/sandwich-6483576_1280.jpg",
+                "https://cdn.pixabay.com/photo/2021/04/19/11/34/donut-6191207_1280.jpg"
+            };
+
+            int randomIndex = new Random().nextInt(defaultImageUrls.length);
+
+            this.profileImageUrl = defaultImageUrls[randomIndex];
+        }
+        else{
+            this.profileImageUrl = profileImageUrl;
+        }
+
     }
 
 }

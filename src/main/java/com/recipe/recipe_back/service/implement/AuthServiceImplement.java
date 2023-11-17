@@ -57,6 +57,7 @@ public class AuthServiceImplement implements AuthService{
             dto.setPassword(encodedPassword);
 
             UserEntity userEntity = new UserEntity(dto);
+            userEntity.defaultProfileImage(dto.getProfileImageUrl());
             userRepository.save(userEntity);
 
         } catch (Exception exception) {
