@@ -7,10 +7,15 @@ public interface ResponseCode {
     String DUPLICATED_EMAIL = "DE";
     String DUPLICATED_NICKNAME = "DN";
     String DUPLICATED_TEL_NUMBER = "DT";
+    String DUPLICATED_PASSWORD = "DP";
     String DUPLICATED_PROFILE_COMMENT = "DC";
+
     String NOT_EXIST_USER = "NU";
     String NOT_EXIST_BOARD = "NB";
 
+    String SAME_PASSWORD = "SP";
+    String PASSWORD_MISSMATCH = "PM";
+    String WITHDRAWAL_FAILED = "WF";
     String FIND_USER_FAILED = "FF";
 
     String SIGN_IN_FAILED = "SF";
