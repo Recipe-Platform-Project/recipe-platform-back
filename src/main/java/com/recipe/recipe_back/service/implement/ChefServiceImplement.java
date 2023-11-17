@@ -44,7 +44,6 @@ public class ChefServiceImplement implements ChefService{
     public ResponseEntity<? super GetChefRankingResponseDto> getChefRanking() {
 
         List<UserEntity> userEntities = new ArrayList<>();
-        List<BoardEntity> boardEntities = new ArrayList<>();
 
         try {
 
@@ -54,14 +53,13 @@ public class ChefServiceImplement implements ChefService{
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
-        return GetChefRankingResponseDto.success(userEntities, boardEntities);
+        return GetChefRankingResponseDto.success(userEntities);
     }
 
     @Override
     public ResponseEntity<? super GetChefSearchListResponseDto> getChefSearchList(String searchNickname) {
      
         List<UserEntity> userEntities = new ArrayList<>();
-        List<BoardEntity> boardEntities = new ArrayList<>();
 
         try {
 
@@ -74,7 +72,7 @@ public class ChefServiceImplement implements ChefService{
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
-        return GetChefSearchListResponseDto.success(userEntities, boardEntities);
+        return GetChefSearchListResponseDto.success(userEntities);
 
     }
     

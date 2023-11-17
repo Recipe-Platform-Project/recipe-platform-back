@@ -19,13 +19,13 @@ public class GetChefListResponseDto extends ResponseDto {
     
     private List<ChefListItem> chefList;
 
-    private GetChefListResponseDto(String code, String message, List<UserEntity> userEntities, List<BoardEntity> boardEntities) {
+    private GetChefListResponseDto(String code, String message, List<UserEntity> userEntities) {
         super(code, message);
-        this.chefList = ChefListItem.getList(userEntities, boardEntities);
+        this.chefList = ChefListItem.getList(userEntities);
     }
 
     public static ResponseEntity<GetChefListResponseDto> success(List<UserEntity> userEntities, List<BoardEntity> boardEntities) {
-        GetChefListResponseDto result = new GetChefListResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, userEntities, boardEntities);
+        GetChefListResponseDto result = new GetChefListResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, userEntities);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
