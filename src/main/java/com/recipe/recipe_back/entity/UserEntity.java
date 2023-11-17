@@ -13,6 +13,7 @@ import com.recipe.recipe_back.dto.request.auth.SignUpRequestDto;
 import com.recipe.recipe_back.dto.request.user.PatchNicknameRequestDto;
 import com.recipe.recipe_back.dto.request.user.PatchProfileImageRequestDto;
 import com.recipe.recipe_back.dto.request.user.PatchUserPwRequestDto;
+import com.recipe.recipe_back.dto.request.userPage.PatchProfileCommentRequestDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -34,6 +35,9 @@ public class UserEntity {
     private Boolean agreedPersonCollection;
     private Boolean agreedPersonProsessing;
     private String profileImageUrl;
+    private String profileComment;
+    private int followingCount;
+    private int followCount;
 
     public UserEntity(SignUpRequestDto dto){
         this.email = dto.getEmail();
@@ -54,6 +58,7 @@ public class UserEntity {
     public void patchProfileImage(PatchProfileImageRequestDto dto) {
         this.profileImageUrl = dto.getProfileImage();
     }
+
 
     //유저 비밀번호 변경
     public void patchUserPassword(String newPassword){
@@ -83,6 +88,26 @@ public class UserEntity {
             this.profileImageUrl = profileImageUrl;
         }
 
+    }
+
+    public void patchProfileComment(PatchProfileCommentRequestDto dto){
+        this.profileComment = dto.getProfileComment();
+    }
+
+    public void increaseFollowingCount() {
+        this.followingCount++;
+    }
+
+    public void decreaseFollowingCount() {
+        this.followingCount--;
+    }
+
+    public void iscreaseFollowCount() {
+        this.followCount++;
+    }
+
+    public void decreaseFollowCount() {
+        this.followCount--;
     }
 
 }
