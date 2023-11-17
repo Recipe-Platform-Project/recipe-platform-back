@@ -20,7 +20,7 @@ public class BoardEntity {
     private String boardMainImageUrl;
     private String title;
     private String introduce;
-    private String content;
+    private String boardContent;
     private String WriteDatetime;
     private int viewCount;
     private String userEmail;
@@ -34,5 +34,13 @@ public class BoardEntity {
     private String requiredTime;
     private String difficulty;
     private String peopleCount;
+
+    public void increaseBoardNumber() {
+        this.boardNumber++;
+    }
+
+    public void decreaseBoardNumber() {
+        this.boardNumber--;
+    }
 
 }

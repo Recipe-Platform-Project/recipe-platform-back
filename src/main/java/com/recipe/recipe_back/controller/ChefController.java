@@ -22,13 +22,13 @@ public class ChefController {
 
     @GetMapping("/list")
     public ResponseEntity<? super GetChefListResponseDto> getChefList() {
-        ResponseEntity<? super GetChefListResponseDto> response = chefService.getChefList(null);
+        ResponseEntity<? super GetChefListResponseDto> response = chefService.getChefList();
         return response;
     }
 
     @GetMapping("")
     public ResponseEntity<? super GetChefRankingResponseDto> getChefRanking() {
-        ResponseEntity<? super GetChefRankingResponseDto> response = chefService.getChefRanking(null);
+        ResponseEntity<? super GetChefRankingResponseDto> response = chefService.getChefRanking();
         return response;
     }
 
@@ -39,5 +39,4 @@ public class ChefController {
         ResponseEntity<? super GetChefSearchListResponseDto> response = chefService.getChefSearchList(searchNickname);
         return response;
     }
-    
 }

@@ -24,17 +24,14 @@ public class ChefServiceImplement implements ChefService{
     private final ChefRepository chefRepository;
 
     @Override
-    public ResponseEntity<? super GetChefListResponseDto> getChefList(String email) {
+    public ResponseEntity<? super GetChefListResponseDto> getChefList() {
 
         List<UserEntity> userEntities = new ArrayList<>();
         List<BoardEntity> boardEntities = new ArrayList<>();
 
         try {
-
-            boolean existedChef = chefRepository.existsById(email);
-            if (!existedChef) return GetChefListResponseDto.notExistUser();
             
-            userEntities = chefRepository.findeByChefList(email);
+            userEntities = chefRepository.findeByChefList();
 
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -44,17 +41,14 @@ public class ChefServiceImplement implements ChefService{
     }
 
     @Override
-    public ResponseEntity<? super GetChefRankingResponseDto> getChefRanking(String email) {
+    public ResponseEntity<? super GetChefRankingResponseDto> getChefRanking() {
 
         List<UserEntity> userEntities = new ArrayList<>();
         List<BoardEntity> boardEntities = new ArrayList<>();
 
         try {
 
-            boolean existedChef = chefRepository.existsById(email);
-            if (!existedChef) return GetChefRankingResponseDto.notExistUser();
-
-            userEntities = chefRepository.findeByChefRanking(email);
+            userEntities = chefRepository.findeByChefRanking();
         
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -64,17 +58,17 @@ public class ChefServiceImplement implements ChefService{
     }
 
     @Override
-    public ResponseEntity<? super GetChefSearchListResponseDto> getChefSearchList(String email) {
+    public ResponseEntity<? super GetChefSearchListResponseDto> getChefSearchList(String searchNickname) {
      
         List<UserEntity> userEntities = new ArrayList<>();
         List<BoardEntity> boardEntities = new ArrayList<>();
 
         try {
 
-            boolean existedChef = chefRepository.existsById(email);
+            boolean existedChef = chefRepository.existsById(searchNickname);
             if (!existedChef) return GetChefSearchListResponseDto.notExistUser();
 
-            userEntities = chefRepository.findeByChefRanking(email);
+            userEntities = chefRepository.findeByChefSearchList(searchNickname);
         
         } catch (Exception exception) {
             exception.printStackTrace();

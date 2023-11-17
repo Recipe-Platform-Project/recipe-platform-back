@@ -29,7 +29,7 @@ public interface ChefRepository extends JpaRepository<UserEntity, String>{
         "LIMIT 50 ",
         nativeQuery = true
     )
-    List<UserEntity> findeByChefRanking(String email);
+    List<UserEntity> findeByChefRanking();
 
     @Query (
         value = 
@@ -46,6 +46,25 @@ public interface ChefRepository extends JpaRepository<UserEntity, String>{
         "ON U.email = B.user_email ",
         nativeQuery = true
     )
-    List<UserEntity> findeByChefList(String email);
+    List<UserEntity> findeByChefList();
+    
+    @Query (
+        value = 
+        "SELECT " +
+            "U.email AS email, " +
+            "U.profile_image_url AS profileImageUrl, " +
+            "U.nickname AS searchNickname, " +
+            "U.follow_count AS followCount, " + 
+            "B.board_number AS boardNumber, " +
+            "B.faborit_count AS faboritCount, " +
+            "B.view_count AS viewCount " +
+        "FROM user AS U " +
+        "INNER JOIN board AS B " +
+        "ON U.email = B.user_email " +
+        "ORDER BY U.follow_count DESC " +
+        "LIMIT 50 ",
+        nativeQuery = true
+    )
+    List<UserEntity> findeByChefSearchList(String searchNickname);
 
 }
