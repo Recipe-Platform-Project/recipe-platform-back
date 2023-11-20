@@ -5,6 +5,11 @@ import java.util.List;
 
 import com.recipe.recipe_back.entity.UserEntity;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class ChefListItem {
     private String email;
     private String profileImageUrl;

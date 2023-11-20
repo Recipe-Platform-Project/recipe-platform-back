@@ -15,18 +15,18 @@ import com.recipe.recipe_back.entity.UserEntity;
 import lombok.Getter;
 
 @Getter
-public class GetUserRecipeResponseDto extends ResponseDto {
-    
-    private List<UserRecipeListItem> userRecipeList;
+public class GetSignInUserRecipeResponseDto extends ResponseDto {
 
-    private GetUserRecipeResponseDto(String code, String message, List<BoardEntity> boardEntities, List<UserEntity> userEntityes) {
+    private List<UserRecipeListItem> signInUserRecipeList;
+
+    private GetSignInUserRecipeResponseDto (String code, String message, List<BoardEntity> boardEntities, List<UserEntity> userEntities) {
         super(code, message);
-        this.userRecipeList = UserRecipeListItem.getList(boardEntities, userEntityes);
+        this.signInUserRecipeList = UserRecipeListItem.getList(boardEntities, userEntities);
     }
 
-    public static ResponseEntity<GetUserRecipeResponseDto> success(List<BoardEntity> boardEntity, List<UserEntity> userEntity) {
-        GetUserRecipeResponseDto result = new GetUserRecipeResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, boardEntity, userEntity);
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
+    public static ResponseEntity<GetSignInUserRecipeResponseDto> success(List<BoardEntity> boardEntities, List<UserEntity> userEntities) {
+        GetSignInUserRecipeResponseDto result = new GetSignInUserRecipeResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, boardEntities, userEntities);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
     public static ResponseEntity<ResponseDto> notExistBoard() {
