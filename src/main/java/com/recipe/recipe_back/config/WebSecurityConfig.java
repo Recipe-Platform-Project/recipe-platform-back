@@ -38,6 +38,8 @@ public class WebSecurityConfig {
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
             .authorizeRequests()
             .antMatchers("/", "/api/v1/auth/**", "/file/**", "/api/v1/search/**").permitAll()
+
+            .antMatchers(HttpMethod.GET, "/api/v1/board/**", "/api/v1/user/*", "/file/image/*").permitAll()
             .antMatchers(HttpMethod.GET, "/api/v1/board/**", "/api/v1/user/**", "/file/image/*", "/api/v1/chef/**").permitAll()
             .antMatchers(HttpMethod.PATCH, "/api/v1/board/increase-view-count/*").permitAll()
             .anyRequest().authenticated().and()
