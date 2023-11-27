@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.recipe.recipe_back.entity.BoardEntity;
 import com.recipe.recipe_back.entity.UserEntity;
+import com.recipe.recipe_back.repository.resultSet.UserRecipeListResultSet;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,21 +19,19 @@ public class UserRecipeListItem {
     private String boardMainImage;
     private String writeDatetime;
     
-    private UserRecipeListItem(BoardEntity boardEntity, UserEntity userEntity) {
-        this.boardNumber = boardEntity.getBoardNumber();
-        this.title = boardEntity.getTitle();
-        this.nickname = userEntity.getNickname();
-        this.boardMainImage = boardEntity.getBoardMainImageUrl();
-        this.writeDatetime = boardEntity.getWriteDatetime();
+    private UserRecipeListItem(UserRecipeListResultSet resultSet) {
+        this.boardNumber = resultSet.getBoardNumber();
+        this.title = resultSet.getTitle();
+        this.nickname = resultSet.getNickname();
+        this.boardMainImage = resultSet.getBoardMainImage();
+        this.writeDatetime = resultSet.getWriteDatetime();
     }
 
-    public static List<UserRecipeListItem> getList(List<BoardEntity> boardEntities, List<UserEntity> userEntities) {
+    public static List<UserRecipeListItem> getList(List<UserRecipeListResultSet> resultSets) {
         List<UserRecipeListItem> list = new ArrayList<>();
-        for (BoardEntity boardEntity: boardEntities) {
-            for (UserEntity userEntity: userEntities) {
-                UserRecipeListItem userRecipeListItem = new UserRecipeListItem(boardEntity, userEntity);
-                list.add(userRecipeListItem);
-            }
+        for (UserRecipeListResultSet resultSet: resultSets) {
+            UserRecipeListItem userRecipeListItem = new UserRecipeListItem(resultSet);
+            list.add(userRecipeListItem);
         }
         return list;
     }

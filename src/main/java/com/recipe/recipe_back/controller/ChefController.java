@@ -27,14 +27,16 @@ public class ChefController {
     }
 
     @GetMapping("")
-    public ResponseEntity<? super GetChefRankingResponseDto> getChefRanking() {
-        ResponseEntity<? super GetChefRankingResponseDto> response = chefService.getChefRanking();
+    public ResponseEntity<? super GetChefRankingResponseDto> getChefRanking(
+        @PathVariable("selected") String selected
+    ) {
+        ResponseEntity<? super GetChefRankingResponseDto> response = chefService.getChefRanking(selected);
         return response;
     }
 
     @GetMapping("/{searchNickname}")
     public ResponseEntity<? super GetChefSearchListResponseDto> getChefSearchList(
-        @PathVariable("searchNickname") String searchNickname
+        @PathVariable(value = "searchNickname") String searchNickname
     ) {
         ResponseEntity<? super GetChefSearchListResponseDto> response = chefService.getChefSearchList(searchNickname);
         return response;

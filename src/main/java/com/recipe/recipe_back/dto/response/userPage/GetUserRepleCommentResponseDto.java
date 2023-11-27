@@ -5,26 +5,26 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import com.recipe.recipe_back.common.object.UserRecipeListItem;
+import com.recipe.recipe_back.common.object.UserRepleCommentListItem;
 import com.recipe.recipe_back.dto.response.ResponseCode;
 import com.recipe.recipe_back.dto.response.ResponseDto;
 import com.recipe.recipe_back.dto.response.ResponseMessage;
-import com.recipe.recipe_back.repository.resultSet.UserRecipeListResultSet;
+import com.recipe.recipe_back.repository.resultSet.UserRepleCommentListResultSet;
 
 import lombok.Getter;
 
 @Getter
-public class GetSignInUserRecipeResponseDto extends ResponseDto {
+public class GetUserRepleCommentResponseDto extends ResponseDto {
 
-    private List<UserRecipeListItem> signInUserRecipeList;
+    List<UserRepleCommentListItem> userRepleCommentList;
 
-    private GetSignInUserRecipeResponseDto (String code, String message, List<UserRecipeListResultSet> resultSets) {
+    private GetUserRepleCommentResponseDto(String code, String message, List<UserRepleCommentListResultSet> resultSets) {
         super(code, message);
-        this.signInUserRecipeList = UserRecipeListItem.getList(resultSets);
+        this.userRepleCommentList = UserRepleCommentListItem.getList(resultSets);
     }
 
-    public static ResponseEntity<GetSignInUserRecipeResponseDto> success(List<UserRecipeListResultSet> resultSets) {
-        GetSignInUserRecipeResponseDto result = new GetSignInUserRecipeResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, resultSets);
+    public static ResponseEntity<GetUserRepleCommentResponseDto> success(List<UserRepleCommentListResultSet> resultSets) {
+        GetUserRepleCommentResponseDto result = new GetUserRepleCommentResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, resultSets);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
@@ -37,5 +37,4 @@ public class GetSignInUserRecipeResponseDto extends ResponseDto {
         ResponseDto result = new ResponseDto(ResponseCode.NOT_EXIST_USER, ResponseMessage.NOT_EXIST_USER);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
     }
-
 }

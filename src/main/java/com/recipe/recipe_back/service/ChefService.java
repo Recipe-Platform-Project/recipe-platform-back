@@ -10,7 +10,7 @@ public interface ChefService {
 
     ResponseEntity<? super GetChefListResponseDto> getChefList();
 
-    ResponseEntity<? super GetChefRankingResponseDto> getChefRanking();
+    ResponseEntity<? super GetChefRankingResponseDto> getChefRanking(String selected);
 
     ResponseEntity<? super GetChefSearchListResponseDto> getChefSearchList(String searchNickname);
 }

@@ -14,17 +14,17 @@ import com.recipe.recipe_back.repository.resultSet.UserRecipeListResultSet;
 import lombok.Getter;
 
 @Getter
-public class GetSignInUserRecipeResponseDto extends ResponseDto {
+public class GetUserRecipeSearchListResponseDto extends ResponseDto {
+    
+    List<UserRecipeListItem> userRecipeSearchList;
 
-    private List<UserRecipeListItem> signInUserRecipeList;
-
-    private GetSignInUserRecipeResponseDto (String code, String message, List<UserRecipeListResultSet> resultSets) {
+    private GetUserRecipeSearchListResponseDto(String code, String message, List<UserRecipeListResultSet> resultSets) {
         super(code, message);
-        this.signInUserRecipeList = UserRecipeListItem.getList(resultSets);
+        this.userRecipeSearchList = UserRecipeListItem.getList(resultSets);
     }
 
-    public static ResponseEntity<GetSignInUserRecipeResponseDto> success(List<UserRecipeListResultSet> resultSets) {
-        GetSignInUserRecipeResponseDto result = new GetSignInUserRecipeResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, resultSets);
+    public static ResponseEntity<GetUserRecipeSearchListResponseDto> success(List<UserRecipeListResultSet> resultSets) {
+        GetUserRecipeSearchListResponseDto result = new GetUserRecipeSearchListResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, resultSets);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
@@ -32,10 +32,4 @@ public class GetSignInUserRecipeResponseDto extends ResponseDto {
         ResponseDto result = new ResponseDto(ResponseCode.NOT_EXIST_BOARD, ResponseMessage.NOT_EXIST_BOARD);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
     }
-
-    public static ResponseEntity<ResponseDto> notExistUser() {
-        ResponseDto result = new ResponseDto(ResponseCode.NOT_EXIST_USER, ResponseMessage.NOT_EXIST_USER);
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
-    }
-
 }

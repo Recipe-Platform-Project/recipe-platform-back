@@ -11,6 +11,7 @@ import com.recipe.recipe_back.dto.response.ResponseDto;
 import com.recipe.recipe_back.dto.response.ResponseMessage;
 import com.recipe.recipe_back.entity.BoardEntity;
 import com.recipe.recipe_back.entity.UserEntity;
+import com.recipe.recipe_back.repository.resultSet.ChefListResultSet;
 
 import lombok.Getter;
 
@@ -19,13 +20,13 @@ public class GetChefListResponseDto extends ResponseDto {
     
     private List<ChefListItem> chefList;
 
-    private GetChefListResponseDto(String code, String message, List<UserEntity> userEntities) {
+    private GetChefListResponseDto(String code, String message, List<ChefListResultSet> resultSets) {
         super(code, message);
-        this.chefList = ChefListItem.getList(userEntities);
+        this.chefList = ChefListItem.getList(resultSets);
     }
 
-    public static ResponseEntity<GetChefListResponseDto> success(List<UserEntity> userEntities, List<BoardEntity> boardEntities) {
-        GetChefListResponseDto result = new GetChefListResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, userEntities);
+    public static ResponseEntity<GetChefListResponseDto> success(List<ChefListResultSet> resultSets) {
+        GetChefListResponseDto result = new GetChefListResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, resultSets);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 

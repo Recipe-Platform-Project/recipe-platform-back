@@ -1,5 +1,7 @@
 package com.recipe.recipe_back.repository;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,6 +11,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.recipe.recipe_back.entity.UserEntity;
+import com.recipe.recipe_back.repository.resultSet.UserRecipeListResultSet;
 
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, String> {

@@ -4,16 +4,16 @@ import java.util.Random;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.recipe.recipe_back.dto.request.auth.FindUserPwRequestDto;
 import com.recipe.recipe_back.dto.request.auth.SignUpRequestDto;
 import com.recipe.recipe_back.dto.request.user.PatchNicknameRequestDto;
 import com.recipe.recipe_back.dto.request.user.PatchProfileImageRequestDto;
-import com.recipe.recipe_back.dto.request.user.PatchUserPwRequestDto;
 import com.recipe.recipe_back.dto.request.userPage.PatchProfileCommentRequestDto;
+import com.recipe.recipe_back.entity.primaryKey.SubscirbePk;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,6 +24,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity(name = "user")
 @Table(name = "user")
+// @IdClass(SubscirbePk.class)
 public class UserEntity {
     @Id
     private String email;
@@ -102,7 +103,7 @@ public class UserEntity {
         this.followingCount--;
     }
 
-    public void iscreaseFollowCount() {
+    public void increaseFollowCount() {
         this.followCount++;
     }
 

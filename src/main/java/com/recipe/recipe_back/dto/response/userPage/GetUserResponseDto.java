@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import com.recipe.recipe_back.dto.response.ResponseCode;
 import com.recipe.recipe_back.dto.response.ResponseDto;
 import com.recipe.recipe_back.dto.response.ResponseMessage;
-import com.recipe.recipe_back.entity.BoardEntity;
 import com.recipe.recipe_back.entity.UserEntity;
 
 import lombok.Getter;

@@ -1,18 +1,20 @@
 package com.recipe.recipe_back.service.implement;
 
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.recipe.recipe_back.common.object.ChefListItem;
 import com.recipe.recipe_back.dto.response.ResponseDto;
 import com.recipe.recipe_back.dto.response.chef.GetChefListResponseDto;
 import com.recipe.recipe_back.dto.response.chef.GetChefRankingResponseDto;
 import com.recipe.recipe_back.dto.response.chef.GetChefSearchListResponseDto;
-import com.recipe.recipe_back.entity.BoardEntity;
-import com.recipe.recipe_back.entity.UserEntity;
 import com.recipe.recipe_back.repository.ChefRepository;
+import com.recipe.recipe_back.repository.resultSet.ChefListResultSet;
 import com.recipe.recipe_back.service.ChefService;
 
 import lombok.RequiredArgsConstructor;
@@ -21,58 +23,63 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ChefServiceImplement implements ChefService{
     
+    private static final String email = null;
     private final ChefRepository chefRepository;
 
     @Override
     public ResponseEntity<? super GetChefListResponseDto> getChefList() {
 
-        List<UserEntity> userEntities = new ArrayList<>();
-        List<BoardEntity> boardEntities = new ArrayList<>();
+        List<ChefListResultSet> resultSets = new ArrayList<>();
 
         try {
             
-            userEntities = chefRepository.findeByChefList();
+            resultSets = chefRepository.findeByChefList();
 
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
-        return GetChefListResponseDto.success(userEntities, boardEntities);
+        return GetChefListResponseDto.success(resultSets);
     }
 
     @Override
-    public ResponseEntity<? super GetChefRankingResponseDto> getChefRanking() {
+    public ResponseEntity<? super GetChefRankingResponseDto> getChefRanking(String selected) {
 
-        List<UserEntity> userEntities = new ArrayList<>();
+        List<ChefListResultSet> resultSets = new ArrayList<>();
 
         try {
+            resultSets = chefRepository.findeByChefRanking();
 
-            userEntities = chefRepository.findeByChefRanking();
-        
+            if (selected.equals("Ranking"))
+                resultSets = chefRepository.findeByChefRanking();
+            if (selected.equals("Like"))
+                resultSets = chefRepository.findeByChefRankingLike();
+
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
-        return GetChefRankingResponseDto.success(userEntities);
+        return GetChefRankingResponseDto.success(resultSets);
     }
 
     @Override
     public ResponseEntity<? super GetChefSearchListResponseDto> getChefSearchList(String searchNickname) {
      
-        List<UserEntity> userEntities = new ArrayList<>();
+        List<ChefListResultSet> resultSets = new ArrayList<>();
 
         try {
 
-            boolean existedChef = chefRepository.existsById(searchNickname);
+            // boolean existedChef = chefRepository.existsById(searchNickname);
+            boolean existedChef = chefRepository.existsByNickname(email);
             if (!existedChef) return GetChefSearchListResponseDto.notExistUser();
 
-            userEntities = chefRepository.findeByChefSearchList(searchNickname);
+            resultSets = chefRepository.findeByChefSearchList(searchNickname);
         
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
-        return GetChefSearchListResponseDto.success(userEntities);
+        return GetChefSearchListResponseDto.success(resultSets);
 
     }
     

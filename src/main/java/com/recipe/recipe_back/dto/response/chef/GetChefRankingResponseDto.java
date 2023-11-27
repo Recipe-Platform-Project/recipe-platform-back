@@ -10,6 +10,7 @@ import com.recipe.recipe_back.dto.response.ResponseCode;
 import com.recipe.recipe_back.dto.response.ResponseDto;
 import com.recipe.recipe_back.dto.response.ResponseMessage;
 import com.recipe.recipe_back.entity.UserEntity;
+import com.recipe.recipe_back.repository.resultSet.ChefListResultSet;
 
 import lombok.Getter;
 
@@ -18,13 +19,13 @@ public class GetChefRankingResponseDto extends ResponseDto {
     
     private List<ChefListItem> chefList;
 
-    private GetChefRankingResponseDto(String code, String message, List<UserEntity> userEntities) {
+    private GetChefRankingResponseDto(String code, String message, List<ChefListResultSet> resultSets) {
         super(code, message);
-        this.chefList = ChefListItem.getList(userEntities);
+        this.chefList = ChefListItem.getList(resultSets);
     } 
 
-    public static ResponseEntity<GetChefRankingResponseDto> success(List<UserEntity> userEntities) {
-        GetChefRankingResponseDto result = new GetChefRankingResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, userEntities);
+    public static ResponseEntity<GetChefRankingResponseDto> success(List<ChefListResultSet> resultSets) {
+        GetChefRankingResponseDto result = new GetChefRankingResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, resultSets);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 

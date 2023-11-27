@@ -9,8 +9,7 @@ import com.recipe.recipe_back.common.object.UserRecipeListItem;
 import com.recipe.recipe_back.dto.response.ResponseCode;
 import com.recipe.recipe_back.dto.response.ResponseDto;
 import com.recipe.recipe_back.dto.response.ResponseMessage;
-import com.recipe.recipe_back.entity.BoardEntity;
-import com.recipe.recipe_back.entity.UserEntity;
+import com.recipe.recipe_back.repository.resultSet.UserRecipeListResultSet;
 
 import lombok.Getter;
 
@@ -19,13 +18,13 @@ public class GetUserRecipeResponseDto extends ResponseDto {
     
     private List<UserRecipeListItem> userRecipeList;
 
-    private GetUserRecipeResponseDto(String code, String message, List<BoardEntity> boardEntities, List<UserEntity> userEntityes) {
+    private GetUserRecipeResponseDto(String code, String message, List<UserRecipeListResultSet> resultSets) {
         super(code, message);
-        this.userRecipeList = UserRecipeListItem.getList(boardEntities, userEntityes);
+        this.userRecipeList = UserRecipeListItem.getList(resultSets);
     }
 
-    public static ResponseEntity<GetUserRecipeResponseDto> success(List<BoardEntity> boardEntity, List<UserEntity> userEntity) {
-        GetUserRecipeResponseDto result = new GetUserRecipeResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, boardEntity, userEntity);
+    public static ResponseEntity<GetUserRecipeResponseDto> success(List<UserRecipeListResultSet> resultSets) {
+        GetUserRecipeResponseDto result = new GetUserRecipeResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, resultSets);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
     }
 
