@@ -29,7 +29,7 @@ public class BoardController {
         return response;
     }
     
-    @GetMapping("/ranking-board-list")
+    @GetMapping("/ranking/board-list/{selected}/{times}")
     public ResponseEntity<? super GetRankingBoardListResponseDto> getRankingBoardList(
         @PathVariable("selected") String selected,
         @PathVariable("times") String times
