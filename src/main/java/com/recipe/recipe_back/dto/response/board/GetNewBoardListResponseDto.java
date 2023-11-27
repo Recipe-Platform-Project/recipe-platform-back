@@ -14,17 +14,17 @@ import com.recipe.recipe_back.entity.BoardViewEntity;
 import lombok.Getter;
 
 @Getter
-public class GetBestRecipeListResponseDto extends ResponseDto{
+public class GetNewBoardListResponseDto extends ResponseDto{
+    
+    private List<BoardListItem> newList;
 
-    private List<BoardListItem> best3List;
-
-    private GetBestRecipeListResponseDto(String code, String message, List<BoardViewEntity> boardViewEntities){
+    private GetNewBoardListResponseDto(String code, String message, List<BoardViewEntity> boardViewEntities){
         super(code, message);
-        this.best3List = BoardListItem.getList(boardViewEntities);
+        this.newList = BoardListItem.getList(boardViewEntities);
     }
 
-    public static ResponseEntity<GetBestRecipeListResponseDto> success(List<BoardViewEntity> boardViewEntities){
-        GetBestRecipeListResponseDto result = new GetBestRecipeListResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, boardViewEntities);
+    public static ResponseEntity<GetNewBoardListResponseDto> success(List<BoardViewEntity> boardViewEntities){
+        GetNewBoardListResponseDto result = new GetNewBoardListResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, boardViewEntities);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 }

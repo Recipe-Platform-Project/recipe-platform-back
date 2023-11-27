@@ -25,23 +25,26 @@ import lombok.RequiredArgsConstructor;
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class WebSecurityConfig {
-    
+
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Bean
     protected SecurityFilterChain configure(HttpSecurity httpSecurity) throws Exception {
-        
+
         httpSecurity
-            .cors().and()
-            .csrf().disable()
-            .httpBasic().disable()
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-            .authorizeRequests()
-            .antMatchers("/", "/api/v1/auth/**", "/file/**", "/api/v1/search/**").permitAll()
-            .antMatchers(HttpMethod.GET, "/api/v1/board/**", "/api/v1/user/*", "/file/image/*").permitAll()
-            .antMatchers(HttpMethod.PATCH, "/api/v1/board/increase-view-count/*").permitAll()
-            .anyRequest().authenticated().and()
-            .exceptionHandling().authenticationEntryPoint(new FailedAuthenticationEntryPoint());
+                .cors().and()
+                .csrf().disable()
+                .httpBasic().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+                .authorizeRequests()
+                .antMatchers("/", "/api/v1/auth/**", "/file/**", "/api/v1/search/**").permitAll()
+
+                .antMatchers(HttpMethod.GET, "/api/v1/board/**", "/api/v1/user/*", "/file/image/*").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/v1/board/**", "/api/v1/user/**", "/file/image/*", "/api/v1/chef/**")
+                .permitAll()
+                .antMatchers(HttpMethod.PATCH, "/api/v1/board/increase-view-count/*").permitAll()
+                .anyRequest().authenticated().and()
+                .exceptionHandling().authenticationEntryPoint(new FailedAuthenticationEntryPoint());
 
         httpSecurity.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
@@ -51,15 +54,15 @@ public class WebSecurityConfig {
 
 }
 
-class FailedAuthenticationEntryPoint implements AuthenticationEntryPoint{
-    
+class FailedAuthenticationEntryPoint implements AuthenticationEntryPoint {
+
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response,
-            AuthenticationException authException) throws IOException, ServletException{
+            AuthenticationException authException) throws IOException, ServletException {
 
-                response.setContentType("application/json");
-                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                response.getWriter().write("{\"code\": \"AF\", \"message\": \"Authorization Failed.\" }");
-                
-            }
+        response.setContentType("application/json");
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.getWriter().write("{\"code\": \"AF\", \"message\": \"Authorization Failed.\" }");
+
+    }
 }

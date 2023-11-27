@@ -18,11 +18,13 @@ public class BoardViewEntity {
     private int boardNumber;
     private String boardMainImage;
     private String title;
-    private String boardIntroduce;
+    private String introduce;
     private int viewCount;
     private int commentCount;
     private int favoriteCount;
     private String writerProfileImage;    
     private String writerNickname;
     private String recipeTagList;
+    private String writeDatetime;
+    private String kindCategory;
 }

@@ -1,11 +1,27 @@
 package com.recipe.recipe_back.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.recipe.recipe_back.dto.response.board.GetNewBoardListResponseDto;
+import com.recipe.recipe_back.dto.response.board.PatchCommentResponseDto;
+import com.recipe.recipe_back.dto.response.board.PostCommentResponseDto;
+import com.recipe.recipe_back.dto.request.board.PatchCommentRequestDto;
+import com.recipe.recipe_back.dto.request.board.PostCommentRequestDto;
+import com.recipe.recipe_back.dto.response.board.DeleteCommentResponseDto;
 import com.recipe.recipe_back.dto.response.board.GetBestRecipeListResponseDto;
+import com.recipe.recipe_back.dto.response.board.GetCategoryCommendBoardListResponseDto;
+import com.recipe.recipe_back.dto.response.board.GetCommentListResponseDto;
 import com.recipe.recipe_back.service.BoardService;
 
 import lombok.RequiredArgsConstructor;
@@ -22,4 +38,53 @@ public class BoardController {
         ResponseEntity<? super GetBestRecipeListResponseDto> response = boardService.getBestRecipeList();
         return response;
     }
+
+    @GetMapping("/new-list")
+    public ResponseEntity<? super GetNewBoardListResponseDto> get() {
+        ResponseEntity<? super GetNewBoardListResponseDto> response = boardService.getNewBoardList();
+        return response;
+    }
+
+    @GetMapping("/category/{category}")
+    public ResponseEntity<? super GetCategoryCommendBoardListResponseDto> getCategoryCommendBoardList(
+            @PathVariable("category") String category) {
+        ResponseEntity<? super GetCategoryCommendBoardListResponseDto> response = boardService.getCategoryCommendBoardList(category);
+        return response;
+    }
+
+    @GetMapping("/{boardNumber}/comment-list")
+    public ResponseEntity<? super GetCommentListResponseDto> getCommentList(
+            @PathVariable("boardNumber") Integer boardNumber){
+        ResponseEntity<? super GetCommentListResponseDto> response = boardService.getCommentList(boardNumber);
+        return response;
+        }
+
+    @PostMapping("/{boardNumber}/comment")
+    public ResponseEntity<? super PostCommentResponseDto> postComment(
+            @RequestBody @Valid PostCommentRequestDto requestBody,
+            @PathVariable("boardNumber") Integer boardNumber,
+            @AuthenticationPrincipal String email){
+        ResponseEntity<? super PostCommentResponseDto> response = boardService.postComment(requestBody, boardNumber, email);
+        return response;
+    }
+
+    @PatchMapping("/{boardNumber}/{commentNumber}")
+    public ResponseEntity<? super PatchCommentResponseDto> patchComment(
+        @RequestBody @Valid PatchCommentRequestDto requestBody,
+        @PathVariable("boardNumber") Integer boardNumber,
+        @PathVariable("commentNumber") Integer commentNumber,
+        @AuthenticationPrincipal String email){
+            ResponseEntity<? super PatchCommentResponseDto> response = boardService.patchComment(requestBody, boardNumber, commentNumber, email);
+            return response;
+    }    
+    
+    @DeleteMapping("/{boardNumber}/{commentNumber}")
+    public ResponseEntity<? super DeleteCommentResponseDto> deleteComment(
+        @PathVariable("boardNumber") Integer boardNumber,
+        @PathVariable("commentNumber") Integer commentNumber,
+        @AuthenticationPrincipal String email){
+            ResponseEntity<? super DeleteCommentResponseDto> response = boardService.deleteComment(boardNumber, commentNumber, email);
+            return response;
+        }
+    
 }
