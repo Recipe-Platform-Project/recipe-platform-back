@@ -165,7 +165,7 @@ public class UserPageImplement implements UserPageService {
 
         try {
 
-            if (boardEntity == null) return GetUserWritingRecipeListResponseDto.notExistBoard();
+            if (boardEntity == null) return GetUserWritingRecipeListResponseDto.notExistUser();
             
         } catch (Exception exception) {
             exception.printStackTrace();
