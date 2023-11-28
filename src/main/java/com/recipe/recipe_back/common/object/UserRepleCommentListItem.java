@@ -14,6 +14,7 @@ public class UserRepleCommentListItem {
     private int boardNumber;
     private String title;
     private String nickname;
+    private String boardMainImage;
     // private String commentNickname;
     private Integer commentNumber;
     private String contents;
@@ -24,6 +25,7 @@ public class UserRepleCommentListItem {
         this.title = resultSet.getTitle();
         this.nickname = resultSet.getNickname();
         // this.commentNickname = resultSet.getCommentNickname();
+        this.boardMainImage = resultSet.getBoardMainImage();
         this.contents = resultSet.getContents();
         this.writeDatetime = resultSet.getWriteDatetime();
     }

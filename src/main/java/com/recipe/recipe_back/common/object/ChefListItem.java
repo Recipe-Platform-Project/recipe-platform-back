@@ -13,8 +13,7 @@ import lombok.Setter;
 public class ChefListItem {
     private String profileImageUrl;
     private String nickname;
-    private String title;
-    private int followCount;
+    private Integer followCount;
     private Integer boardNumber;
     private Integer favoriteCount;
     private Integer viewCount;
@@ -22,7 +21,6 @@ public class ChefListItem {
     public ChefListItem(ChefListResultSet resultSet) {
         this.profileImageUrl = resultSet.getProfileImageUrl();
         this.nickname = resultSet.getNickname();
-        this.title = resultSet.getTitle();
         this.followCount = resultSet.getFollowCount();
         this.boardNumber = resultSet.getBoardNumber();
         this.favoriteCount = resultSet.getFavoriteCount();

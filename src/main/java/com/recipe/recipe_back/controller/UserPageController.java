@@ -36,7 +36,7 @@ public class UserPageController {
 
     private final UserPageService userPageService;
 
-    @PatchMapping("/{nickname}/introduction")
+    @PatchMapping("/introduction")
     public ResponseEntity<? super PatchProfileCommentResponseDto> patchProfileComment(
         @RequestBody @Valid PatchProfileCommentRequestDto requestBody,
         @PathVariable("nickname") String nickname,

@@ -1,14 +1,11 @@
 package com.recipe.recipe_back.service.implement;
 
-import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.recipe.recipe_back.common.object.ChefListItem;
 import com.recipe.recipe_back.dto.response.ResponseDto;
 import com.recipe.recipe_back.dto.response.chef.GetChefListResponseDto;
 import com.recipe.recipe_back.dto.response.chef.GetChefRankingResponseDto;
@@ -48,7 +45,7 @@ public class ChefServiceImplement implements ChefService{
         List<ChefListResultSet> resultSets = new ArrayList<>();
 
         try {
-            resultSets = chefRepository.findeByChefRanking();
+            // resultSets = chefRepository.findeByChefRanking();
 
             if (selected.equals("Ranking"))
                 resultSets = chefRepository.findeByChefRanking();
@@ -68,8 +65,6 @@ public class ChefServiceImplement implements ChefService{
         List<ChefListResultSet> resultSets = new ArrayList<>();
 
         try {
-
-            // boolean existedChef = chefRepository.existsById(searchNickname);
             boolean existedChef = chefRepository.existsByNickname(email);
             if (!existedChef) return GetChefSearchListResponseDto.notExistUser();
 
