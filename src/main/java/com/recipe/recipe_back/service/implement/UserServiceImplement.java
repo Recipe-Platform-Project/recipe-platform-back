@@ -102,6 +102,7 @@ public class UserServiceImplement implements UserService {
 
     @Override
     public ResponseEntity<? super MembershipWithdrawalResposneDto> withdrawal(String email) {
+        
         try {
 
             boolean existedUser = userRepository.existsByEmail(email);

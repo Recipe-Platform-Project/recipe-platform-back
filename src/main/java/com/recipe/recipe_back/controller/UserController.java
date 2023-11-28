@@ -51,7 +51,6 @@ public class UserController {
 
     @DeleteMapping("/{userEmail}")
     public ResponseEntity<? super MembershipWithdrawalResposneDto> withdrawal(@PathVariable("userEmail") String userEmail, @AuthenticationPrincipal String email) {
-        
         ResponseEntity<? super MembershipWithdrawalResposneDto> response = userService.withdrawal(email);
         return response;
     }

@@ -12,26 +12,34 @@ import lombok.Setter;
 @Setter
 public class BoardListItem {
     private int boardNumber;
+    private String boardMainImage;
     private String title;
-    private String boardTitleImage;
+    private String introduce;
+    private int viewCount;
+    private int commentCount;
     private int favoriteCount;
-    private int starRanting;
-    private String wirteNickname;
-    private String writeProfileImage;
-
-    public BoardListItem(BoardViewEntity boardViewEntity) {
+    private String writerProfileImage;    
+    private String writerNickname;
+    private String writeDatetime;
+    private String tags;
+    
+    public BoardListItem(BoardViewEntity boardViewEntity){
         this.boardNumber = boardViewEntity.getBoardNumber();
+        this.boardMainImage = boardViewEntity.getBoardMainImage();
         this.title = boardViewEntity.getTitle();
-        this.boardTitleImage = boardViewEntity.getBoardTitleImage();
+        this.introduce = boardViewEntity.getIntroduce();
+        this.viewCount = boardViewEntity.getViewCount();
+        this.commentCount = boardViewEntity.getCommentCount();
         this.favoriteCount = boardViewEntity.getFavoriteCount();
-        this.starRanting = boardViewEntity.getStarRanting();
-        this.wirteNickname = boardViewEntity.getWirteNickname();
-        this.writeProfileImage = boardViewEntity.getWriteProfileImage();
+        this.writerNickname = boardViewEntity.getWriterNickname();
+        this.writerProfileImage = boardViewEntity.getWriterProfileImage();
+        this.tags = boardViewEntity.getRecipeTagList();
+        this.writeDatetime = boardViewEntity.getWriteDatetime();
     }
 
-    public static List<BoardListItem> getList(List<BoardViewEntity> boardViewEntities){
+    public static List<BoardListItem> getList(List<BoardViewEntity> boardViewEntities) {
         List<BoardListItem> list = new ArrayList<>();
-        for(BoardViewEntity boardViewEntity: boardViewEntities){
+        for (BoardViewEntity boardViewEntity : boardViewEntities) {
             BoardListItem boardListItem = new BoardListItem(boardViewEntity);
             list.add(boardListItem);
         }
