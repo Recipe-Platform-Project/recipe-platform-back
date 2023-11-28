@@ -22,7 +22,7 @@ public class GetUserRecipeResponseDto extends ResponseDto {
 
         this.boardNumber = boardEntity.getBoardNumber();
         this.title = boardEntity.getTitle();
-        this.boardMainImage = boardEntity.getBoardMainImageUrl();
+        this.boardMainImage = boardEntity.getBoardMainImage();
     }
 
     public static ResponseEntity<GetUserRecipeResponseDto> success(BoardEntity boardEntity) {

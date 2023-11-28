@@ -10,6 +10,7 @@ import com.recipe.recipe_back.dto.response.ResponseDto;
 import com.recipe.recipe_back.dto.response.chef.GetChefListResponseDto;
 import com.recipe.recipe_back.dto.response.chef.GetChefRankingResponseDto;
 import com.recipe.recipe_back.dto.response.chef.GetChefSearchListResponseDto;
+import com.recipe.recipe_back.dto.response.chef.GetTop30ChefListResponseDto;
 import com.recipe.recipe_back.entity.BoardEntity;
 import com.recipe.recipe_back.entity.UserEntity;
 import com.recipe.recipe_back.repository.ChefRepository;
@@ -19,8 +20,8 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class ChefServiceImplement implements ChefService{
-    
+public class ChefServiceImplement implements ChefService {
+
     private final ChefRepository chefRepository;
 
     @Override
@@ -30,7 +31,7 @@ public class ChefServiceImplement implements ChefService{
         List<BoardEntity> boardEntities = new ArrayList<>();
 
         try {
-            
+
             userEntities = chefRepository.findeByChefList();
 
         } catch (Exception exception) {
@@ -48,7 +49,7 @@ public class ChefServiceImplement implements ChefService{
         try {
 
             userEntities = chefRepository.findeByChefRanking();
-        
+
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError();
@@ -58,16 +59,17 @@ public class ChefServiceImplement implements ChefService{
 
     @Override
     public ResponseEntity<? super GetChefSearchListResponseDto> getChefSearchList(String searchNickname) {
-     
+
         List<UserEntity> userEntities = new ArrayList<>();
 
         try {
 
             boolean existedChef = chefRepository.existsById(searchNickname);
-            if (!existedChef) return GetChefSearchListResponseDto.notExistUser();
+            if (!existedChef)
+                return GetChefSearchListResponseDto.notExistUser();
 
             userEntities = chefRepository.findeByChefSearchList(searchNickname);
-        
+
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError();
@@ -75,5 +77,21 @@ public class ChefServiceImplement implements ChefService{
         return GetChefSearchListResponseDto.success(userEntities);
 
     }
-    
+
+    @Override
+    public ResponseEntity<? super GetTop30ChefListResponseDto> getTop30ChefList() {
+
+        List<UserEntity> userEntities = new ArrayList<>();
+
+        try {
+
+            userEntities = chefRepository.findTop30ByOrderByFollowCountDesc();
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+        return GetTop30ChefListResponseDto.success(userEntities);
+    }
+
 }

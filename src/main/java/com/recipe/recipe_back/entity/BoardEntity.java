@@ -1,6 +1,12 @@
 package com.recipe.recipe_back.entity;
 
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.util.Date;
+
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -15,32 +21,29 @@ import lombok.NoArgsConstructor;
 @Table(name="board")
 public class BoardEntity {
     
-    @Id
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int boardNumber;
-    private String boardMainImageUrl;
+    private String boardMainImage;
     private String title;
     private String introduce;
-    private String boardContent;
-    private String WriteDatetime;
+    private String writeDatetime;
+    private String kindCategory;
+    private String wayCategory;
+    private String materialCategory;
+    private String requiredTime;
+    private String difficulty;
+    private String peopleCount;
+    private String videoLink;
     private int viewCount;
     private String userEmail;
     private int commentCount;
     private int favoriteCount;
-    private String kindCategory;
-    private String wayCategory;
-    private String materialCategory;
-    private String videoLink;
-    private String cookingTip;
-    private String requiredTime;
-    private String difficulty;
-    private String peopleCount;
 
-    public void increaseBoardNumber() {
-        this.boardNumber++;
+    public void increaseCommentCount() {
+        this.commentCount++;
     }
 
-    public void decreaseBoardNumber() {
-        this.boardNumber--;
+    public void decreaseCommentCount() {
+        this.commentCount--;
     }
-
 }
