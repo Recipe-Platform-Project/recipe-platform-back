@@ -12,12 +12,12 @@ import com.recipe.recipe_back.entity.CommentEntity;
 import com.recipe.recipe_back.repository.resultSet.CommentListResultSet;
 
 @Repository
-public interface CommentRepository extends JpaRepository<CommentEntity, Integer>{
-    
+public interface CommentRepository extends JpaRepository<CommentEntity, Integer> {
+
     @Query(value = "SELECT " +
             "U.nickname AS nickname, " +
             "U.profile_image_url AS profileImage, " +
-            "C.contents AS content, " +
+            "C.contents AS contents, " +
             "C.write_datetime AS writeDatetime " +
             "FROM reple_comment AS C " +
             "INNER JOIN user AS U " +

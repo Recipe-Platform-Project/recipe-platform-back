@@ -5,15 +5,11 @@ import java.util.List;
 
 import com.recipe.recipe_back.entity.UserEntity;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class ChefListItem {
     private String email;
     private String profileImageUrl;
@@ -29,11 +25,12 @@ public class ChefListItem {
 
     public static List<ChefListItem> getList(List<UserEntity> userEntities) {
         List<ChefListItem> list = new ArrayList<>();
-
         for (UserEntity userEntity : userEntities) {
             ChefListItem chefListItem = new ChefListItem(userEntity);
             list.add(chefListItem);
         }
         return list;
     }
+
+    
 }

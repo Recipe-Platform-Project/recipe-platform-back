@@ -16,12 +16,18 @@ import org.springframework.web.bind.annotation.RestController;
 import com.recipe.recipe_back.dto.response.board.GetNewBoardListResponseDto;
 import com.recipe.recipe_back.dto.response.board.PatchCommentResponseDto;
 import com.recipe.recipe_back.dto.response.board.PostCommentResponseDto;
+import com.recipe.recipe_back.dto.response.board.PostReviewResponseDto;
 import com.recipe.recipe_back.dto.request.board.PatchCommentRequestDto;
+import com.recipe.recipe_back.dto.request.board.PatchReviewRequestDto;
 import com.recipe.recipe_back.dto.request.board.PostCommentRequestDto;
+import com.recipe.recipe_back.dto.request.board.PostReviewRequestDto;
+import com.recipe.recipe_back.dto.response.board.PatchReviewResponseDto;
 import com.recipe.recipe_back.dto.response.board.DeleteCommentResponseDto;
+import com.recipe.recipe_back.dto.response.board.DeleteReviewResponseDto;
 import com.recipe.recipe_back.dto.response.board.GetBestRecipeListResponseDto;
 import com.recipe.recipe_back.dto.response.board.GetCategoryCommendBoardListResponseDto;
 import com.recipe.recipe_back.dto.response.board.GetCommentListResponseDto;
+import com.recipe.recipe_back.dto.response.board.GetReviewListResponseDto;
 import com.recipe.recipe_back.service.BoardService;
 
 import lombok.RequiredArgsConstructor;
@@ -40,7 +46,7 @@ public class BoardController {
     }
 
     @GetMapping("/new-list")
-    public ResponseEntity<? super GetNewBoardListResponseDto> get() {
+    public ResponseEntity<? super GetNewBoardListResponseDto> getNewList() {
         ResponseEntity<? super GetNewBoardListResponseDto> response = boardService.getNewBoardList();
         return response;
     }
@@ -68,7 +74,7 @@ public class BoardController {
         return response;
     }
 
-    @PatchMapping("/{boardNumber}/{commentNumber}")
+    @PatchMapping("/{boardNumber}/comment/{commentNumber}")
     public ResponseEntity<? super PatchCommentResponseDto> patchComment(
         @RequestBody @Valid PatchCommentRequestDto requestBody,
         @PathVariable("boardNumber") Integer boardNumber,
@@ -78,7 +84,7 @@ public class BoardController {
             return response;
     }    
     
-    @DeleteMapping("/{boardNumber}/{commentNumber}")
+    @DeleteMapping("/{boardNumber}/comment/{commentNumber}")
     public ResponseEntity<? super DeleteCommentResponseDto> deleteComment(
         @PathVariable("boardNumber") Integer boardNumber,
         @PathVariable("commentNumber") Integer commentNumber,
@@ -87,4 +93,37 @@ public class BoardController {
             return response;
         }
     
+    @PostMapping("/{boardNumber}/review")
+    public ResponseEntity<? super PostReviewResponseDto> postReview(
+        @RequestBody @Valid PostReviewRequestDto requestBody,
+        @PathVariable("boardNumber") Integer boardNumber,
+        @AuthenticationPrincipal String email){
+            ResponseEntity<? super PostReviewResponseDto> response = boardService.postReview(requestBody, boardNumber, email);
+            return response;
+        }
+    @PatchMapping("/{boardNumber}/review/{commentNumber}")
+    public ResponseEntity<? super PatchReviewResponseDto> patchReview(
+        @RequestBody @Valid PatchReviewRequestDto requestBody,
+        @PathVariable("boardNumber") Integer boardNumber,
+        @PathVariable("commentNumber") Integer commentNumber,
+        @AuthenticationPrincipal String email){
+            ResponseEntity<? super PatchReviewResponseDto> response = boardService.patchReview(requestBody, boardNumber, commentNumber, email);
+            return response;
+    } 
+    
+    @GetMapping("/{boardNumber}/review-list")
+    public ResponseEntity<? super GetReviewListResponseDto> getReviewList(
+            @PathVariable("boardNumber") Integer boardNumber){
+        ResponseEntity<? super GetReviewListResponseDto> response = boardService.getReviewList(boardNumber);
+        return response;
+        }
+
+    @DeleteMapping("/{boardNumber}/review/{commentNumber}")
+    public ResponseEntity<? super DeleteReviewResponseDto> deleteReview(
+        @PathVariable("boardNumber") Integer boardNumber,
+        @PathVariable("commentNumber") Integer commentNumber,
+        @AuthenticationPrincipal String email){
+            ResponseEntity<? super DeleteReviewResponseDto> response = boardService.deleteReview(boardNumber, commentNumber, email);
+            return response;
+        }
 }

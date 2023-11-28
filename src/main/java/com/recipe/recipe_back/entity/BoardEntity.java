@@ -1,5 +1,9 @@
 package com.recipe.recipe_back.entity;
 
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,19 +26,18 @@ public class BoardEntity {
     private String boardMainImage;
     private String title;
     private String introduce;
-    private String WriteDatetime;
+    private String writeDatetime;
+    private String kindCategory;
+    private String wayCategory;
+    private String materialCategory;
+    private String requiredTime;
+    private String difficulty;
+    private String peopleCount;
+    private String videoLink;
     private int viewCount;
     private String userEmail;
     private int commentCount;
     private int favoriteCount;
-    private String kindCategory;
-    private String wayCategory;
-    private String materialCategory;
-    private String videoLink;
-    private String cookingTip;
-    private String requiredTime;
-    private String difficulty;
-    private String peopleCount;
 
     public void increaseCommentCount() {
         this.commentCount++;
