@@ -12,6 +12,7 @@ public interface ResponseCode {
 
     String NOT_EXIST_USER = "NU";
     String NOT_EXIST_BOARD = "NB";
+    String NOT_EXIST_COMMENT = "NC";
 
     String SAME_PASSWORD = "SP";
     String PASSWORD_MISSMATCH = "PM";

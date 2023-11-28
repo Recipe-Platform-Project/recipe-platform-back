@@ -40,7 +40,7 @@ public class UserEntity {
     private int followingCount;
     private int followCount;
 
-    public UserEntity(SignUpRequestDto dto){
+    public UserEntity(SignUpRequestDto dto) {
         this.email = dto.getEmail();
         this.password = dto.getPassword();
         this.nickname = dto.getNickname();
@@ -60,38 +60,36 @@ public class UserEntity {
         this.profileImageUrl = dto.getProfileImage();
     }
 
-
-    //유저 비밀번호 변경
-    public void patchUserPassword(String newPassword){
+    // 유저 비밀번호 변경
+    public void patchUserPassword(String newPassword) {
         this.password = newPassword;
     }
 
-    //유저 임시 비밀번호 발급
+    // 유저 임시 비밀번호 발급
     public void updatePassword(String newPassword) {
         this.password = new BCryptPasswordEncoder().encode(newPassword);
     }
 
-    public void defaultProfileImage(String profileImageUrl){
-        if(profileImageUrl == null){
+    public void defaultProfileImage(String profileImageUrl) {
+        if (profileImageUrl == null) {
             String[] defaultImageUrls = {
-                "https://cdn.pixabay.com/photo/2023/10/02/14/00/egg-8289259_1280.png",
-                "https://cdn.pixabay.com/photo/2023/10/04/18/49/pizza-8294340_1280.png",
-                "https://cdn.pixabay.com/photo/2022/01/11/19/43/avocado-6931344_1280.jpg",
-                "https://cdn.pixabay.com/photo/2021/07/21/17/25/sandwich-6483576_1280.jpg",
-                "https://cdn.pixabay.com/photo/2021/04/19/11/34/donut-6191207_1280.jpg"
+                    "https://cdn.pixabay.com/photo/2023/10/02/14/00/egg-8289259_1280.png",
+                    "https://cdn.pixabay.com/photo/2023/10/04/18/49/pizza-8294340_1280.png",
+                    "https://cdn.pixabay.com/photo/2022/01/11/19/43/avocado-6931344_1280.jpg",
+                    "https://cdn.pixabay.com/photo/2021/07/21/17/25/sandwich-6483576_1280.jpg",
+                    "https://cdn.pixabay.com/photo/2021/04/19/11/34/donut-6191207_1280.jpg"
             };
 
             int randomIndex = new Random().nextInt(defaultImageUrls.length);
 
             this.profileImageUrl = defaultImageUrls[randomIndex];
-        }
-        else{
+        } else {
             this.profileImageUrl = profileImageUrl;
         }
 
     }
 
-    public void patchProfileComment(PatchProfileCommentRequestDto dto){
+    public void patchProfileComment(PatchProfileCommentRequestDto dto) {
         this.profileComment = dto.getProfileComment();
     }
 

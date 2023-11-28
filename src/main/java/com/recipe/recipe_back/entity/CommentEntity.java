@@ -10,8 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.recipe.recipe_back.dto.request.board.PatchReviewRequestDto;
-import com.recipe.recipe_back.dto.request.board.PostReviewRequestDto;
+import com.recipe.recipe_back.dto.request.board.PatchCommentRequestDto;
+import com.recipe.recipe_back.dto.request.board.PostCommentRequestDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,21 +20,20 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "review")
-@Table(name = "review")
-public class ReviewEntity {
+@Entity(name = "reple_comment")
+@Table(name = "reple_comment")
+public class CommentEntity {
     
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int commentNumber;
     private int boardNumber;
     private String userEmail;
     private String contents;
     private String writeDatetime;
-    private int rating;
-    private String commentImage;
 
-    public ReviewEntity(PostReviewRequestDto dto, Integer boardNumber, String email){
-        java.util.Date now = Date.from(Instant.now());
+    public CommentEntity(PostCommentRequestDto dto, Integer boardNumber, String email){
+        Date now = Date.from(Instant.now());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String writeDatetime = simpleDateFormat.format(now);
 
@@ -42,13 +41,9 @@ public class ReviewEntity {
         this.userEmail = email;
         this.contents = dto.getContents();
         this.writeDatetime = writeDatetime;
-        this.rating = dto.getRating();
-        this.commentImage = dto.getCommentImage();
     }
 
-    public void patch(PatchReviewRequestDto dto){
+    public void patch(PatchCommentRequestDto dto){
         this.contents = dto.getContents();
-        this.rating = dto.getRating();
-        this.commentImage = dto.getCommentImage();
     }
 }

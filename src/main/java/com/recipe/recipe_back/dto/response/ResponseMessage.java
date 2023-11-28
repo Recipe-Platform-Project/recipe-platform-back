@@ -13,6 +13,7 @@ public interface ResponseMessage {
     String DUPLICATED_PROFILE_COMMENT = "Duplicate profile comment.";
     String NOT_EXIST_USER = "This user does not exist.";
     String NOT_EXIST_BOARD = "This board does not exist.";
+    String NOT_EXIST_COMMENT = "This comment does not exist";
 
     String SAME_PASSWORD = "Same Password";
     String PASSWORD_MISSMATCH = "Password Missmatch";

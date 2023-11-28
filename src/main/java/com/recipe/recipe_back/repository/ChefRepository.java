@@ -9,16 +9,12 @@ import com.recipe.recipe_back.repository.resultSet.ChefListResultSet;
 
 import java.util.List;
 
-
 @Repository
-public interface ChefRepository extends JpaRepository<UserEntity, String>{
-
+public interface ChefRepository extends JpaRepository<UserEntity, String> {
+    
     boolean existsByNickname(String email);
 
-    // 쉐프 랭킹(구독순)
-    @Query (
-        value = 
-        "SELECT " +
+    @Query(value = "SELECT " +
             "U.email AS email, " +
             "U.profile_image_url AS profileImageUrl, " +
             "U.nickname AS nickname, " +
@@ -43,9 +39,7 @@ public interface ChefRepository extends JpaRepository<UserEntity, String>{
     )
     List<ChefListResultSet> findeByChefRanking();
 
-    @Query (
-        value = 
-        "SELECT " +
+    @Query(value = "SELECT " +
             "U.email AS email, " +
             "U.profile_image_url AS profileImageUrl, " +
             "U.nickname AS nickname, " +
@@ -126,4 +120,9 @@ public interface ChefRepository extends JpaRepository<UserEntity, String>{
     List<ChefListResultSet> findeByChefSearchList(String searchNickname);
     
 
+    // @Query(value = "SELECT * " +
+    // "FROM user " +
+    // "ORDER BY follow_count DESC " +
+    // "LIMIT 30 ", nativeQuery = true)
+    List<UserEntity> findTop30ByOrderByFollowCountDesc();
 }

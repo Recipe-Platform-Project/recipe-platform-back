@@ -10,6 +10,9 @@ import com.recipe.recipe_back.dto.response.ResponseDto;
 import com.recipe.recipe_back.dto.response.chef.GetChefListResponseDto;
 import com.recipe.recipe_back.dto.response.chef.GetChefRankingResponseDto;
 import com.recipe.recipe_back.dto.response.chef.GetChefSearchListResponseDto;
+import com.recipe.recipe_back.dto.response.chef.GetTop30ChefListResponseDto;
+import com.recipe.recipe_back.entity.BoardEntity;
+import com.recipe.recipe_back.entity.UserEntity;
 import com.recipe.recipe_back.repository.ChefRepository;
 import com.recipe.recipe_back.repository.resultSet.ChefListResultSet;
 import com.recipe.recipe_back.service.ChefService;
@@ -77,5 +80,21 @@ public class ChefServiceImplement implements ChefService{
         return GetChefSearchListResponseDto.success(resultSets);
 
     }
-    
+
+    @Override
+    public ResponseEntity<? super GetTop30ChefListResponseDto> getTop30ChefList() {
+
+        List<UserEntity> userEntities = new ArrayList<>();
+
+        try {
+
+            userEntities = chefRepository.findTop30ByOrderByFollowCountDesc();
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+        return GetTop30ChefListResponseDto.success(userEntities);
+    }
+
 }

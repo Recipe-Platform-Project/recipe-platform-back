@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.recipe.recipe_back.dto.response.chef.GetChefListResponseDto;
 import com.recipe.recipe_back.dto.response.chef.GetChefRankingResponseDto;
 import com.recipe.recipe_back.dto.response.chef.GetChefSearchListResponseDto;
+import com.recipe.recipe_back.dto.response.chef.GetTop30ChefListResponseDto;
 import com.recipe.recipe_back.service.ChefService;
 
 import lombok.RequiredArgsConstructor;
@@ -41,4 +42,11 @@ public class ChefController {
         ResponseEntity<? super GetChefSearchListResponseDto> response = chefService.getChefSearchList(searchNickname);
         return response;
     }
+
+    @GetMapping("/top30-chef")
+    public ResponseEntity<? super GetTop30ChefListResponseDto> getTop3ChefList() {
+        ResponseEntity<? super GetTop30ChefListResponseDto> response = chefService.getTop30ChefList();
+        return response;
+    }
+    
 }
