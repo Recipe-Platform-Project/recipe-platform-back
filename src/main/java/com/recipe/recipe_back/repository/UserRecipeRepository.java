@@ -39,7 +39,8 @@ public interface UserRecipeRepository extends JpaRepository<BoardEntity, Integer
         "FROM board AS B " +
         "INNER JOIN user AS U " +
         "ON B.user_email = U.email " +
-        "WHERE B.title LIKE '%?1%' " +
+        "WHERE true " +
+        "AND B.title LIKE '%?1%' " +
         "ORDER BY B.write_datetime DESC ",
         nativeQuery = true
     )

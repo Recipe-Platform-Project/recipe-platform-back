@@ -286,6 +286,5 @@ public class UserPageImplement implements UserPageService {
 
         return PutToUserFromUserResponseDto.success();
     }
-
     
 }

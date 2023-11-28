@@ -54,11 +54,11 @@ public class UserPageController {
         return response;
     }
 
-    @GetMapping("/{nickname}")
+    @GetMapping("/{email}")
     public ResponseEntity<? super GetUserResponseDto> getUser(
-        @PathVariable("nickname") String nickname
+        @PathVariable("email") String email
     ) {
-        ResponseEntity<? super GetUserResponseDto> response = userPageService.getUser(nickname);
+        ResponseEntity<? super GetUserResponseDto> response = userPageService.getUser(email);
         return response;
     }
 
@@ -70,9 +70,9 @@ public class UserPageController {
         return response;
     }
 
-    @GetMapping("/{nickname}/user-recipe-list")
+    @GetMapping("/{email}/user-recipe-list")
     public ResponseEntity<? super GetUserRecipeResponseDto> getUserRecipe(
-        @PathVariable("nickname") String nickname
+        @PathVariable("email") String email
     ) {
         ResponseEntity<? super GetUserRecipeResponseDto> response = userPageService.getUserRecipe();
         return response;
