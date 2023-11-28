@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResponseDto {
-    
+
     private String code;
     private String Message;
 
@@ -24,4 +24,10 @@ public class ResponseDto {
         ResponseDto result = new ResponseDto(ResponseCode.VALIDATION_FAILED, ResponseMessage.VALIDATION_FAILED);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
     }
+
+    public static ResponseEntity<ResponseDto> authorizationFailed() {
+        ResponseDto result = new ResponseDto(ResponseCode.AUTHORIZATION_FAILED, ResponseCode.AUTHORIZATION_FAILED);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
+    }
+
 }
