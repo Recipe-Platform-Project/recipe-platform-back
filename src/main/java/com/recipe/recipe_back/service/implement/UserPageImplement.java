@@ -35,6 +35,7 @@ import com.recipe.recipe_back.repository.resultSet.ChefListResultSet;
 import com.recipe.recipe_back.repository.resultSet.UserRecipeListResultSet;
 import com.recipe.recipe_back.repository.resultSet.UserRepleCommentListResultSet;
 import com.recipe.recipe_back.repository.resultSet.UserReviewListResultSet;
+import com.recipe.recipe_back.repository.resultSet.UserWritingRecipeListResultSet;
 import com.recipe.recipe_back.service.UserPageService;
 
 import lombok.RequiredArgsConstructor;
@@ -161,18 +162,18 @@ public class UserPageImplement implements UserPageService {
     @Override
     public ResponseEntity<? super GetUserWritingRecipeListResponseDto> getUserWritingRecipeList(String email) {
 
-        BoardEntity boardEntity = null;
+        List<UserWritingRecipeListResultSet> resultSets = new ArrayList<>();
 
         try {
 
-            if (boardEntity == null) return GetUserWritingRecipeListResponseDto.notExistUser();
+            if (resultSets == null) return GetUserWritingRecipeListResponseDto.notExistUser();
             
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
 
-        return GetUserWritingRecipeListResponseDto.success(boardEntity);
+        return GetUserWritingRecipeListResponseDto.success(resultSets);
     }
 
     @Override

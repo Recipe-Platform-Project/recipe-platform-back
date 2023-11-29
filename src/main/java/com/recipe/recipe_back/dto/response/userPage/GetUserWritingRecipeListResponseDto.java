@@ -1,36 +1,32 @@
 package com.recipe.recipe_back.dto.response.userPage;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import com.recipe.recipe_back.common.object.UserReviewListItem;
+import com.recipe.recipe_back.common.object.UserWritingRecipeListItem;
 import com.recipe.recipe_back.dto.response.ResponseCode;
 import com.recipe.recipe_back.dto.response.ResponseDto;
 import com.recipe.recipe_back.dto.response.ResponseMessage;
 import com.recipe.recipe_back.entity.BoardEntity;
+import com.recipe.recipe_back.repository.resultSet.UserWritingRecipeListResultSet;
 
 import lombok.Getter;
 
 @Getter
 public class GetUserWritingRecipeListResponseDto extends ResponseDto {
 
-    private int boardNumber;
-    private String title;
-    private String boardContent;
-    private String boardMainImage;
-    private String writeDatetime;
+    private List<UserWritingRecipeListItem> userWritingRecipeList;
 
-    private GetUserWritingRecipeListResponseDto(String code, String message, BoardEntity boardEntity) {
+    private GetUserWritingRecipeListResponseDto(String code, String message, List<UserWritingRecipeListResultSet> resultSets) {
         super(code, message);
-
-        this.boardNumber = boardEntity.getBoardNumber();
-        this.title = boardEntity.getTitle();
-        this.boardContent = boardEntity.getBoardContent();
-        this.boardMainImage = boardEntity.getBoardMainImageUrl();
-        this.writeDatetime = boardEntity.getWriteDatetime();
+        this.userWritingRecipeList = UserWritingRecipeListItem.getList(resultSets);
     }
 
-    public static ResponseEntity<GetUserWritingRecipeListResponseDto> success(BoardEntity boardEntity) {
-        GetUserWritingRecipeListResponseDto result = new GetUserWritingRecipeListResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, boardEntity);
+    public static ResponseEntity<GetUserWritingRecipeListResponseDto> success(List<UserWritingRecipeListResultSet> resultSets) {
+        GetUserWritingRecipeListResponseDto result = new GetUserWritingRecipeListResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, resultSets);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
