@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import com.recipe.recipe_back.dto.request.board.PatchCommentRequestDto;
 import com.recipe.recipe_back.dto.request.board.PatchReviewRequestDto;
 import com.recipe.recipe_back.dto.request.board.PostCommentRequestDto;
-import com.recipe.recipe_back.dto.request.board.PostRecipeWriteSequenceRequestDto;
 import com.recipe.recipe_back.dto.request.board.PostReviewRequestDto;
 import com.recipe.recipe_back.dto.response.board.GetBestRecipeListResponseDto;
 import com.recipe.recipe_back.dto.response.board.GetCategoryCommendBoardListResponseDto;
@@ -18,6 +17,8 @@ import com.recipe.recipe_back.dto.response.board.PostReviewResponseDto;
 import com.recipe.recipe_back.dto.response.board.DeleteCommentResponseDto;
 import com.recipe.recipe_back.dto.response.board.DeleteReviewResponseDto;
 import com.recipe.recipe_back.dto.response.board.PatchReviewResponseDto;
+import com.recipe.recipe_back.dto.response.board.GetCatagorySearchBoardListResponseDto;
+import com.recipe.recipe_back.dto.response.board.GetRankingBoardListResponseDto;
 
 public interface BoardService {
     
@@ -36,4 +37,7 @@ public interface BoardService {
 
     ResponseEntity<? super DeleteCommentResponseDto> deleteComment(Integer boardNumber, Integer commentNumber, String email);
     ResponseEntity<? super DeleteReviewResponseDto> deleteReview(Integer boardNumber, Integer commentNumber, String email);
+
+    ResponseEntity<? super GetCatagorySearchBoardListResponseDto> getCatagorySearchBoardList(String searchWord, String type, String way, String material);
+    ResponseEntity<? super GetRankingBoardListResponseDto> getRankingBoardList(String selected, String times);
 }

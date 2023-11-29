@@ -1,17 +1,20 @@
 package com.recipe.recipe_back.controller;
 
-import javax.validation.Valid;
-
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.recipe.recipe_back.dto.response.board.GetCatagorySearchBoardListResponseDto;
+import com.recipe.recipe_back.dto.response.board.GetRankingBoardListResponseDto;
+
+import javax.validation.Valid;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.recipe.recipe_back.dto.response.board.GetNewBoardListResponseDto;
 import com.recipe.recipe_back.dto.response.board.PatchCommentResponseDto;
@@ -36,8 +39,27 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/api/v1/board")
 @RequiredArgsConstructor
 public class BoardController {
-    
     private final BoardService boardService;
+
+    @GetMapping(value={"/recipe-list/{searchWord}/{kind}/{way}/{material}", "/recipe-list/{kind}/{way}/{material}"})
+    public ResponseEntity<? super GetCatagorySearchBoardListResponseDto> getCatagorySearchBoardList(
+        @PathVariable(value="searchWord", required = false) String searchWord,
+        @PathVariable("kind") String kind,
+        @PathVariable("way") String way,
+        @PathVariable("material") String material
+    ){
+        ResponseEntity<? super GetCatagorySearchBoardListResponseDto> response = boardService.getCatagorySearchBoardList(searchWord, kind, way, material);
+        return response;
+    }
+    
+    @GetMapping("/ranking/board-list/{selected}/{times}")
+    public ResponseEntity<? super GetRankingBoardListResponseDto> getRankingBoardList(
+        @PathVariable("selected") String selected,
+        @PathVariable("times") String times
+    ){
+        ResponseEntity<? super GetRankingBoardListResponseDto> response = boardService.getRankingBoardList(selected, times);
+        return response;
+    }
 
     @GetMapping("/best-3")
     public ResponseEntity<? super GetBestRecipeListResponseDto> getBestRecipeList() {
@@ -53,7 +75,7 @@ public class BoardController {
 
     @GetMapping("/category/{category}")
     public ResponseEntity<? super GetCategoryCommendBoardListResponseDto> getCategoryCommendBoardList(
-            @PathVariable("category") String category) {
+        @PathVariable("category") String category) {
         ResponseEntity<? super GetCategoryCommendBoardListResponseDto> response = boardService.getCategoryCommendBoardList(category);
         return response;
     }
@@ -65,6 +87,7 @@ public class BoardController {
         return response;
         }
 
+        
     @PostMapping("/{boardNumber}/comment")
     public ResponseEntity<? super PostCommentResponseDto> postComment(
             @RequestBody @Valid PostCommentRequestDto requestBody,

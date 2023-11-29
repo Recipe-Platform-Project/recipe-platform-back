@@ -1,7 +1,11 @@
 package com.recipe.recipe_back.service.implement;
 
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -9,15 +13,16 @@ import org.springframework.stereotype.Service;
 import com.recipe.recipe_back.dto.request.board.PatchCommentRequestDto;
 import com.recipe.recipe_back.dto.request.board.PatchReviewRequestDto;
 import com.recipe.recipe_back.dto.request.board.PostCommentRequestDto;
-import com.recipe.recipe_back.dto.request.board.PostRecipeWriteSequenceRequestDto;
 import com.recipe.recipe_back.dto.request.board.PostReviewRequestDto;
 import com.recipe.recipe_back.dto.response.ResponseDto;
 import com.recipe.recipe_back.dto.response.board.DeleteCommentResponseDto;
 import com.recipe.recipe_back.dto.response.board.DeleteReviewResponseDto;
 import com.recipe.recipe_back.dto.response.board.GetBestRecipeListResponseDto;
+import com.recipe.recipe_back.dto.response.board.GetCatagorySearchBoardListResponseDto;
 import com.recipe.recipe_back.dto.response.board.GetCategoryCommendBoardListResponseDto;
 import com.recipe.recipe_back.dto.response.board.GetCommentListResponseDto;
 import com.recipe.recipe_back.dto.response.board.GetNewBoardListResponseDto;
+import com.recipe.recipe_back.dto.response.board.GetRankingBoardListResponseDto;
 import com.recipe.recipe_back.dto.response.board.PatchCommentResponseDto;
 import com.recipe.recipe_back.dto.response.board.PatchReviewResponseDto;
 import com.recipe.recipe_back.dto.response.board.PostCommentResponseDto;
@@ -26,7 +31,6 @@ import com.recipe.recipe_back.dto.response.board.GetReviewListResponseDto;
 import com.recipe.recipe_back.entity.BoardEntity;
 import com.recipe.recipe_back.entity.BoardViewEntity;
 import com.recipe.recipe_back.entity.CommentEntity;
-import com.recipe.recipe_back.entity.RecipeWriteSequenceEntity;
 import com.recipe.recipe_back.entity.ReviewEntity;
 import com.recipe.recipe_back.repository.BoardRepository;
 import com.recipe.recipe_back.repository.BoardViewRepository;
@@ -299,7 +303,57 @@ public class BoardServiceImplement implements BoardService {
 
                 return DeleteReviewResponseDto.success();
     }
+@Override
+    public ResponseEntity<? super GetCatagorySearchBoardListResponseDto> getCatagorySearchBoardList(String searchWord, String kind, String way, String material) {
 
+        List<BoardViewEntity> boardViewEntities = new ArrayList<>();
+
+        searchWord = searchWord == null ? "" : searchWord;
+        kind = kind.equals("전체") ? "" : kind;
+        way = way.equals("전체") ? "" : way;
+        material = material.equals("전체") ? "" : material;
+
+        try {
+            boardViewEntities = boardViewRepository.getCatagorySeachList(searchWord, kind, way, material);
+        } catch (Exception exception) {
+        exception.printStackTrace();
+        return ResponseDto.databaseError();
+        }
+        return GetCatagorySearchBoardListResponseDto.sucess(boardViewEntities);
+    }
+
+    @Override
+    public ResponseEntity<? super GetRankingBoardListResponseDto> getRankingBoardList(String selected, String times) {
+
+        List<BoardViewEntity> boardViewEntities = new ArrayList<>();
+
+        try{
+            Date nowDate = Date.from(Instant.now());
+            int amountToSubtract = times.equals("days") ? 24 :
+                                    times.equals("weekly") ? 168 :
+                                    times.equals("month") ? 672 : 0;
+            Date compareDate = Date.from(Instant.now().minus(amountToSubtract, ChronoUnit.HOURS));
+
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            String nowString = simpleDateFormat.format(nowDate);
+            String comparString = simpleDateFormat.format(compareDate);
+
+            if (selected.equals("best"))
+                boardViewEntities = boardViewRepository.getRankingViewCountList(comparString, nowString);
+            if (selected.equals("favorite"))
+                boardViewEntities = boardViewRepository.getRankingViewCountList(comparString, nowString);
+            if (selected.equals("view"))
+                boardViewEntities = boardViewRepository.getRankingViewCountList(comparString, nowString);
+
+        
+        } catch(Exception exception){
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+        return GetRankingBoardListResponseDto.success(boardViewEntities);
+
+
+    }
 
 
 }
