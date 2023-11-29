@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import com.recipe.recipe_back.common.object.ChefListItem;
+import com.recipe.recipe_back.common.object.ChefListItem30;
 import com.recipe.recipe_back.dto.response.ResponseCode;
 import com.recipe.recipe_back.dto.response.ResponseDto;
 import com.recipe.recipe_back.dto.response.ResponseMessage;
@@ -16,11 +16,11 @@ import lombok.Getter;
 @Getter
 public class GetTop30ChefListResponseDto extends ResponseDto{
 
-    private List<ChefListItem> chefList;
+    private List<ChefListItem30> chefList;
 
     private GetTop30ChefListResponseDto(String code, String message, List<UserEntity> userEntities){
         super(code, message);
-        this.chefList = ChefListItem.getList(userEntities);
+        this.chefList = ChefListItem30.getList(userEntities);
     }
 
     public static ResponseEntity<GetTop30ChefListResponseDto> success(List<UserEntity> userEntities) {

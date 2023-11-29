@@ -3,6 +3,7 @@ package com.recipe.recipe_back.common.object;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.recipe.recipe_back.entity.UserEntity;
 import com.recipe.recipe_back.repository.resultSet.ChefListResultSet;
 
 import lombok.Getter;
