@@ -8,8 +8,14 @@ public interface ResponseMessage {
     String DUPLICATED_EMAIL = "Duplicate email.";
     String DUPLICATED_NICKNAME = "Duplicate nickname.";
     String DUPLICATED_TEL_NUMBER = "Duplicate telephone number.";
+    String DUPLICATED_PASSWORD = "Duplicate Password";
     String NOT_EXIST_USER = "This user does not exist.";
     String NOT_EXIST_BOARD = "This board does not exist.";
+
+    String SAME_PASSWORD = "Same Password";
+    String PASSWORD_MISSMATCH = "Password Missmatch";
+
+    String WITHDRAWAL_FAILED = "Membership Withdrawal Failed";
 
     String FIND_USER_FAILED = "Find User ID Failed";
     String SIGN_IN_FAILED = "Login information mismatch.";
