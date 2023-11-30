@@ -1,7 +1,7 @@
 package com.recipe.recipe_back.dto.response;
 
 public interface ResponseMessage {
-    
+
     String SUCCESS = "Success.";
 
     String VALIDATION_FAILED = "Validation failed.";
@@ -23,5 +23,7 @@ public interface ResponseMessage {
     String NO_PERMISSION = "Do not have permission.";
 
     String DATABASE_ERROR = "Database error.";
+
+    String AUTHORIZATION_FAILED = "Authorization failed.";
 
 }

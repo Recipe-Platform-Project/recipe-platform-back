@@ -23,4 +23,6 @@ public interface ResponseCode {
 
     String DATABASE_ERROR = "DBE";
 
+    String AUTHORIZATION_FAILED = "AF";
+
 }
