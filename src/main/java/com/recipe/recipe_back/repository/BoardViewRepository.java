@@ -36,15 +36,21 @@ public interface BoardViewRepository extends JpaRepository<BoardViewEntity, Inte
    "SELECT " +
    " B.board_number AS board_number, " +
    " B.title AS title, " +
+   " B.introduce AS introduce, " +
    " B.board_content AS board_content, " +
-   " B.board_main_image AS board_title_image, " +
+   " B.board_main_image AS board_main_image, " +
    " B.favorite_count AS favorite_count, " +
    " B.kind_category AS kind_category, " +
    " B.way_category AS way_category, " +
    " B.material_category AS material_category, " +
-   " C.star_rating AS star_rating, " +
-   " U.nickname AS wirte_nickname, " +
-   " U.profile_image_url AS wirt_profile_image " +
+   " B.comment_count AS comment_count, " +
+   " IFNULL(C.star_rating, '0') AS star_rating, " +
+   " U.nickname AS writer_nickname, " +
+   " U.profile_image_url AS writer_profile_image, " +
+   " B.view_count AS view_count, " +
+   " B.user_email AS writer_email, " +
+   " B.write_datetime AS write_datetime, " +
+   " T.recipe_tag_list AS recipe_tag_list " +
    " FROM board AS B " +
    " LEFT JOIN user U " +
    " ON B.user_email = U.email " +
@@ -55,6 +61,12 @@ public interface BoardViewRepository extends JpaRepository<BoardViewEntity, Inte
    "     GROUP BY board_number " +
    " ) AS C " +
    " ON B.board_number = C.board_number " +
+   " LEFT JOIN ( " +
+   "    SELECT board_number, recipe_tag_list " +
+   "    FROM recipe_tag " +
+   "    GROUP BY board_number " +
+   ") AS T " +
+   " ON B.board_number = T.board_number " +
    " ORDER BY view_count DESC " +
    " LIMIT 50 ",
    nativeQuery =true

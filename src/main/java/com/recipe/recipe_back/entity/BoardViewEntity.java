@@ -27,4 +27,9 @@ public class BoardViewEntity {
     private String recipeTagList;
     private String writeDatetime;
     private String kindCategory;
+    private String boardContent;
+    private String wayCategory;
+    private String materialCategory;
+    private String starRating;
+    private String writerEmail;
 }

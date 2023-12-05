@@ -22,6 +22,7 @@ public class BoardListItem {
     private String writerNickname;
     private String writeDatetime;
     private String tags;
+    private String starRating;
     
     public BoardListItem(BoardViewEntity boardViewEntity){
         this.boardNumber = boardViewEntity.getBoardNumber();
@@ -35,6 +36,7 @@ public class BoardListItem {
         this.writerProfileImage = boardViewEntity.getWriterProfileImage();
         this.tags = boardViewEntity.getRecipeTagList();
         this.writeDatetime = boardViewEntity.getWriteDatetime();
+        this.starRating = boardViewEntity.getStarRating();
     }
 
     public static List<BoardListItem> getList(List<BoardViewEntity> boardViewEntities) {
