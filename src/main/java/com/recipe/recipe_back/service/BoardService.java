@@ -2,6 +2,7 @@ package com.recipe.recipe_back.service;
 
 import org.springframework.http.ResponseEntity;
 
+<<<<<<< HEAD
 import com.recipe.recipe_back.dto.request.board.PatchCommentRequestDto;
 import com.recipe.recipe_back.dto.request.board.PatchReviewRequestDto;
 import com.recipe.recipe_back.dto.request.board.PostCommentRequestDto;
@@ -36,4 +37,17 @@ public interface BoardService {
 
     ResponseEntity<? super DeleteCommentResponseDto> deleteComment(Integer boardNumber, Integer commentNumber, String email);
     ResponseEntity<? super DeleteReviewResponseDto> deleteReview(Integer boardNumber, Integer commentNumber, String email);
+=======
+import com.recipe.recipe_back.common.object.RecipeWriteSequenceItem;
+import com.recipe.recipe_back.dto.request.board.PostBoardRequestDto;
+import com.recipe.recipe_back.dto.response.board.PostBoardResponseDto;
+import com.recipe.recipe_back.dto.response.board.PutFavoriteResponseDto;
+
+public interface BoardService {
+
+    ResponseEntity<? super PostBoardResponseDto> postBoard(PostBoardRequestDto dto, RecipeWriteSequenceItem item,
+            String email);
+
+    ResponseEntity<? super PutFavoriteResponseDto> putFavorite(Integer boardNumber, String email);
+>>>>>>> c1390bc424548b29b47ad940be2253942162cad4
 }
