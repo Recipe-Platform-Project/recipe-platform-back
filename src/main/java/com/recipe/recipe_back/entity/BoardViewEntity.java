@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity(name = "board_view")
 @Table(name = "board_view")
+
 public class BoardViewEntity {
     @Id
     private int boardNumber;
